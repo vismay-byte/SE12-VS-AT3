@@ -53,6 +53,10 @@ How and when will I check this?
 
 <br>
 
+<br>
+
+<br>
+
 # Usability – Is it user-friendly?
 
 **The UI/UX (user interface/user experience) is clear, intuitive and easy to navigate**
@@ -99,6 +103,11 @@ How and when will I check this?
 
 <br>
 
+<br>
+
+<br>
+
+
 # Performance – Is it fast and efficient?
 **Page load times are optimized (e.g., lazy loading, minified assets).**
 
@@ -143,6 +152,11 @@ How and when will I check this?
 
 
 <br>
+
+<br>
+
+<br>
+
 
 # Security – Is it protected against threats?
 **User authentication & authorisation are implemented securely.**
@@ -189,6 +203,11 @@ How and when will I check this?
 
 <br>
 
+<br>
+
+<br>
+
+
 # Compatability and Responsiveness – Does it work everywhere?
 **Cross-browser compatibility (tested in Chrome, Firefox, Safari, Edge).**
 
@@ -231,6 +250,10 @@ What does this mean for my project? (If not relevant, say why.)
 
 How and when will I check this?
 
+
+<br>
+
+<br>
 
 <br>
 
@@ -291,6 +314,11 @@ How and when will I check this?
 
 <br>
 
+<br>
+
+<br>
+
+
 # Testing – Has it been properly tested?
 **Unit tests check individual functions/components.**
 
@@ -336,6 +364,11 @@ How and when will I check this?
 
 <br>
 
+<br>
+
+<br>
+
+
 # Error Handling & Logging – Can it recover from failures?
 **Application handles errors gracefully (instead of crashing).**
 
@@ -378,6 +411,10 @@ What does this mean for my project? (If not relevant, say why.)
 
 How and when will I check this?
 
+
+<br>
+
+<br>
 
 <br>
 
