@@ -11,3 +11,8 @@
 5. Data dictionary describing the data structures and variables used.
 
 6. Use a modelling tool to represent your software system and explain why that tool is appropriate in this case.
+    - Data Flow Diagram (Level 1)
+    - Structure Chart
+    - Class Diagram
+    - Storyboard
+    - Decision Tree
