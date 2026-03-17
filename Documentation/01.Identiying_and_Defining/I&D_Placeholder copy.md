@@ -8,4 +8,6 @@
 
 4. Who is it for? How would it be used? What are the important characteristics and/or features?
 
-5. How do you plan to get it done in the time available?
+5. What constraints may affect the project?
+
+6. What assumptions are being made about the scenario and/or users?

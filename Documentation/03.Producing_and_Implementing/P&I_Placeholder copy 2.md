@@ -1,7 +1,7 @@
 # Starting Point:
 
-1. Algorithms, (using either pseudocode) or flowcharts, describing the logic of your software solution
+1. Flowchart algorithms describing the logic of your software solution
 
-2. Evidence of version control using annotated screenshots from Git or similar tool.
+2. How security is implemented within the code.
 
-3. How will security be implemented within the code?
+3. Include relevant code snippets as part of your explanation.
