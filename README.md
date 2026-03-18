@@ -3,7 +3,7 @@
 Use this ePortfolio as Template for yout Task 3. 
 To Copy th ePortfolio use teh "Fork" button in the top Right. 
 
-![alt text](image.png)
+![alt text](README_Fork_ePortfolio.png)
 
 **Project Overview**
 
