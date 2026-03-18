@@ -2,6 +2,8 @@
 
 1. Define the problem it is being created to solve.
 
+I am going to create...............................
+
 2. What is the software you have decided to create?
 
 3. Define its scope/boundaries - what it will and will not do.
