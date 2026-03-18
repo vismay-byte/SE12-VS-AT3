@@ -1,5 +1,10 @@
 # Software Engineering Project 2026
 
+Use this ePortfolio as Template for yout Task 3. 
+To Copy th ePortfolio use teh "Fork" button in the top Right. 
+
+![alt text](image.png)
+
 **Project Overview**
 
 This GitLab repository will contain all components of your Year 12 Software Engineering Project (Task 3).
