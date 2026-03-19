@@ -1,7 +1,5 @@
 # Starting Point:
 
-Hello Caitlin
-
 1. Define the problem it is being created to solve.
 
 2. What is the software you have decided to create?
