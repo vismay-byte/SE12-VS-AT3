@@ -4,7 +4,7 @@
 
 # Vismay Swami
 
-### Software ENgineering Year 12 Assessment Task 3
+### Software Engineering Year 12 Assessment Task 3
 
 ---
 
