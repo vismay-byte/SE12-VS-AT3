@@ -18,8 +18,9 @@ This portfolio will cover the various aspects of this project assessment task. T
 
 |Section|Description|
 |---|---|
-|01 · Identifying and Defining|This will define and identify the issues that the PWA will solve|
-|02 · Research and Planning|This will include various ways to solve this issue found through the research of ongoing issues|
+|03 · Project Journal|Multiple entries tracking progress of project|
+|02 · Identifying and Defining|This will define and identify the issues that the PWA will solve|
+|03 · Research and Planning|This will include various ways to solve this issue found through the research of ongoing issues|
 |||
 
 ---
