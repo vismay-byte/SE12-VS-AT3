@@ -19,7 +19,7 @@ Your teacher will assess your entire project directly from GitLab, so all files 
 **Project Repository Structure**
 - Documentation
     - Project-Journal
-    - 1. Identifying-and-Defining
+    - 1. [Identifying-and-Defining](Documentation/01.Identiying_and_Defining/I&D_Placeholder%20copy.md)
     - 2. Researching-and-Planning
     - 3. Producing-and-Implementing
     - 4. Testing-and-Evaluating
