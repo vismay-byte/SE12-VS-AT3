@@ -27,3 +27,11 @@ This portfolio will cover the various aspects of this project assessment task. T
 ## Links to Pages With Information
 
 1. [Identifying and Defining](Documentation/01.Identiying_and_Defining/I&D_Placeholder%20copy.md)
+
+
+---
+
+#### Contact Details
+
+**School** · Sydney Distance Education High School, Hurlstone Agrciultural High School
+**Email** · vismay.swami@education.nsw.gov.au
