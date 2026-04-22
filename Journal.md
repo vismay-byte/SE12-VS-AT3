@@ -1,11 +1,3 @@
-#### 
-    |AT3 ePortfolio|Project Journal|
-    |--------------------------------|------------------------------:|
-
-
-
-<br>
-<br>
 
 ## Project Journal
 
