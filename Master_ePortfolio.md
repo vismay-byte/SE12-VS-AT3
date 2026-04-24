@@ -27,6 +27,7 @@ This portfolio will cover the various aspects of this project assessment task. T
 
 ## Links to Pages With Information
 
+1. [Project Journal](Journal.md)
 1. [Identifying and Defining](Documentation/01.Identiying_and_Defining/I&D_Placeholder%20copy.md)
 
 
