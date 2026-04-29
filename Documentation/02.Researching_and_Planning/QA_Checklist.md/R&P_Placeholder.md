@@ -3,7 +3,7 @@
 1. Gantt chart containing major tasks, the dependencies between them, and when they should take place. 
 Milestones should also be included on the Gantt chart.
 
-
+![SE12 Gantt Chart](SE12-VS_GanttChart.png)
 
 2. What software development approach (Waterfall/Agile/Wagile) will you be using and why.
 
