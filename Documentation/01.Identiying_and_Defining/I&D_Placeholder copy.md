@@ -12,19 +12,28 @@ To combat this issue, I aim to create a Web App which is able to set reminders a
 
 ## Scope and Boundaries
 
+It will:
+* Calculate fuel required for legs based off aircraft type and distance
+* Calculate approximate time required for each leg
+* Remind the user of when certain checklists/actions should be conducted based off inputs from pilot prior to flight
 
+It will not:
+* Track the user based off GPS
+* Be able to communicate with towers or conduct and of the required actions
 
 ## Ideal Audience and Use
 
-
+The ideal audience for this would be student pilots who are currently in the process of developing their flight management and navigational skills. This will help the users to remember to conduct various navigational checks at checkpoints and allow for the management of flight awareness. It will also be useful to minimise the amount of fuel utilised during the journey saving the student extra fees on top of the already expensive process of achieving their license.
 
 ## Constraints
 
-
+Due to levels of knowledge and access to hardware and software, the product will be restricted in the way that it functions such that, it may not be as efficient and may not be able to provide visual references such as a live GPS. Furthermore, due to this lack in technology, we also may not be able to track and manage the data accurately as there can always be redirections based on live issues and instructions given by the ATC.
 
 ## Assumptions being made
 
-
+Assumptions being made include:
+* The pilot knows their route prior to starting the flight
+* No changes made by ATC
 
 ---
 
