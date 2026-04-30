@@ -26,7 +26,12 @@ Social Issues
 
 4. Communication is very important in project work, and even more so in the distance education environment. Discuss how you plan to maintain appropriate communication with stakeholders (e.g. client, teacher) as you work on this project. (see course work Set 17.06)
 
+Client:
+* Will stay in touch with the client via messaging software such as Instagram
+* We may also utilise emails to communicate and send prototypes of software
 
+Teachers:
+* Can stay in touch via email
 
 5. Define functional and performance requirements by creating a Quality Assurance Checklist, using the template supplied in Set 17.07.
 
