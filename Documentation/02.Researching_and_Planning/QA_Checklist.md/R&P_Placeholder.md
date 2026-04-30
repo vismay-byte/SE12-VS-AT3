@@ -15,7 +15,14 @@ I will be utilising the Agile software approach in the completion of this projec
 
 3. Discuss AT LEAST TWO social and/or ethical issues relevant to your project. (See Set 17.04)
 
+Ethical Issues
+* Ensure that any code or inspiration utilised is properly cited and credits are given
+* Ensure that an accessible and useable UI is utilised. (DO not use manipulative UI)
+* Ensure that web is secure enough to prevent XSS and phishing attacks
 
+Social Issues
+* Ensure that all major browsers are accounted for and have ability to access the app
+* Ensure that sturdy security is established to maintain data security and gain user trust
 
 4. Communication is very important in project work, and even more so in the distance education environment. Discuss how you plan to maintain appropriate communication with stakeholders (e.g. client, teacher) as you work on this project. (see course work Set 17.06)
 

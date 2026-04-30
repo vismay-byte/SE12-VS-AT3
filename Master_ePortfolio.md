@@ -29,6 +29,7 @@ This portfolio will cover the various aspects of this project assessment task. T
 
 1. [Project Journal](Journal.md)
 1. [Identifying and Defining](Documentation/01.Identiying_and_Defining/I&D_Placeholder%20copy.md)
+1. [Research and Planning](Documentation/02.Researching_and_Planning/QA_Checklist.md)
 
 
 ---
