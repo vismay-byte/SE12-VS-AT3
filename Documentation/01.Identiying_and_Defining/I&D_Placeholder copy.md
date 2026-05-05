@@ -12,7 +12,7 @@ To combat this issue, I aim to create a Web App which is able to set reminders a
 
 ## Scope and Boundaries
 
-It will:
+It will: 
 * Calculate fuel required for legs based off aircraft type and distance
 * Calculate approximate time required for each leg
 * Remind the user of when certain checklists/actions should be conducted based off inputs from pilot prior to flight
@@ -20,6 +20,7 @@ It will:
 It will not:
 * Track the user based off GPS
 * Be able to communicate with towers or conduct and of the required actions
+* Include all airfields within NSW but only major airfields in Sydney utilised by training pilots.
 
 ## Ideal Audience and Use
 
@@ -27,7 +28,7 @@ The ideal audience for this would be student pilots who are currently in the pro
 
 ## Constraints
 
-Due to levels of knowledge and access to hardware and software, the product will be restricted in the way that it functions such that, it may not be as efficient and may not be able to provide visual references such as a live GPS. Furthermore, due to this lack in technology, we also may not be able to track and manage the data accurately as there can always be redirections based on live issues and instructions given by the ATC.
+Due to levels of knowledge and access to hardware and software, the product will be restricted in the way that it functions such that, it may not be as efficient and may not be able to provide visual references such as a live GPS. Furthermore, due to this lack in technology, we also may not be able to track and manage the data accurately as there can always be redirections based on live issues and instructions given by the ATC. The features will also be limited to airfields within the Sydney region only due to the shear scale of this project as well as the lack of technology and skill.
 
 ## Assumptions being made
 

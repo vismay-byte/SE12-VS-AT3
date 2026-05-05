@@ -17,12 +17,20 @@ I will be utilising the Agile software approach in the completion of this projec
 
 Ethical Issues
 * Ensure that any code or inspiration utilised is properly cited and credits are given
+    * Will require a bibliography with all of my sources properly referenced (APA)
 * Ensure that an accessible and useable UI is utilised. (DO not use manipulative UI)
-* Ensure that web is secure enough to prevent XSS and phishing attacks
+    * This will require a decent amount of time to work on the front-end of the program to make sure that everything is sized properly such that no issues occur regarding the UI no matter what device is being utilised
+* Ensure that PWA is secure enough to prevent XSS and phishing attacks
+    * Need to use data sanitisation properly to ensure that this is prevented. 
+    * A workaround may be required as some data that is required by the user may need to include some special characters used commonly for attacks
 
 Social Issues
 * Ensure that all major browsers are accounted for and have ability to access the app
+    * Need to ensure that this is all accessible wiht all features included from any of the major browsers. Since a lot of these browsers may have differences in the way that things are incorporated, it is vital that any troubleshooting that is necessary is conducted.
 * Ensure that sturdy security is established to maintain data security and gain user trust
+    * Need to ensure there is sufficient amounts of security protocols to protect flight data and location
+* Not all airports/aerodromes can be covered
+    * This is an issue since this will make the program inaccessible to many people located outside of Sydney however, due to the constraints that are present regarding time, skill, and hardware available, including all airfields within the Sydney region is quite inclusive given the constraints.
 
 4. Communication is very important in project work, and even more so in the distance education environment. Discuss how you plan to maintain appropriate communication with stakeholders (e.g. client, teacher) as you work on this project. (see course work Set 17.06)
 
