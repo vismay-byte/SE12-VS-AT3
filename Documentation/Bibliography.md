@@ -2,6 +2,7 @@
 
 ---
 
+
 1. CASA VFRG | Version 7.0. (n.d.). https://www.casa.gov.au/sites/default/files/2022-02/visual-flight-rules-guide.pdf
 2. CASR PART 91 GENERAL OPERATING AND FLIGHT RULES PLAIN ENGLISH GUIDE. (n.d.). https://www.casa.gov.au/sites/default/files/2021-12/plain-english-guide-part-91-new-flight-operations-regulations-print-version.pdf
 3. Civil. (2022, October 18). Episode 25: Flight plans and SARTIME. Civil Aviation Safety Authority. https://www.casa.gov.au/resources-and-education/education-and-training/out-n-back/episode-25-flight-plans-and-sartime
@@ -30,6 +31,7 @@
 26. VFR CROSS-COUNTRY PLANNING VFR CROSS-COUNTRY PLANNING GUIDE Day Before Flight. (n.d.). Retrieved May 5, 2026, from https://www.skychiefsaviation.com/wp-content/uploads/2021/06/VFR-CROSS-COUNTRY.pdf
 27. Guidelines for aircraft fuel requirements ADVISORY CIRCULAR AC 91-15 v1.1 For Flight Operations Regulations commencing on 2 December 2021. (2021). https://www.casa.gov.au/guidelines-aircraft-fuel-requirements
 28. Bern Moskotaywene. (2026). IFR n VFR Mnemonics. Scribd. https://www.scribd.com/document/72120162/IFR-n-VFR-Mnemonics
+
 
 
 ---
