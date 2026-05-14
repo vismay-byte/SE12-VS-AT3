@@ -8,3 +8,12 @@
     -	Use the Software Evaluation Template from Set 19.06,
     -	Replace the contents of column 1 with your own criteria from the Quality Assurance Checklist,
     -	Complete columns 2 and 3 for each criteria
+
+
+## [Back to Master](/at-3-e-portfolio-vismay-swami-attempt-3/Master_ePortfolio.md)
+
+---
+
+##### Vismay Swami Software Engineering AT3
+
+**Email** · vismay.swami@education.nsw.gov.au
