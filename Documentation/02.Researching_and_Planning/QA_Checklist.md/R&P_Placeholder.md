@@ -1,11 +1,12 @@
-# Starting Point:
+# Research and Planning
 
-1. Gantt chart containing major tasks, the dependencies between them, and when they should take place. 
-Milestones should also be included on the Gantt chart.
+---
+
+## Gantt Chart
 
 ![SE12 Gantt Chart](SE12-VS_GanttChart.png)
 
-2. What software development approach (Waterfall/Agile/Wagile) will you be using and why.
+## Software Development Approach
 
 I will be utilising the Agile software approach in the completion of this project. Why:
 
@@ -13,7 +14,7 @@ I will be utilising the Agile software approach in the completion of this projec
 * This allows me to work on parts/functions in the code throughout the duration of the task and makes it such that I do not have to follow a strict order allowing for better motivation as well as better quality of product
 * The agile structure will also allow me to recieve feedback from my client more frequently
 
-3. Discuss AT LEAST TWO social and/or ethical issues relevant to your project. (See Set 17.04)
+## Social and Ethical Issues with Program
 
 Ethical Issues
 * Ensure that any code or inspiration utilised is properly cited and credits are given
@@ -32,7 +33,7 @@ Social Issues
 * Not all airports/aerodromes can be covered
     * This is an issue since this will make the program inaccessible to many people located outside of Sydney however, due to the constraints that are present regarding time, skill, and hardware available, including all airfields within the Sydney region is quite inclusive given the constraints.
 
-4. Communication is very important in project work, and even more so in the distance education environment. Discuss how you plan to maintain appropriate communication with stakeholders (e.g. client, teacher) as you work on this project. (see course work Set 17.06)
+## Communication Plan
 
 Client:
 * Will stay in touch with the client via messaging software such as Instagram
@@ -41,9 +42,23 @@ Client:
 Teachers:
 * Can stay in touch via email
 
-5. Define functional and performance requirements by creating a Quality Assurance Checklist, using the template supplied in Set 17.07.
+Issues that may occur in communication include:
+* When working with the client, our time schedules may not line up as we all have very different schedules which may make it difficult to ask for and recieve feedback or collaborate effectively. To address this issue, I will provide sufficient time between each line of communication conducted to prevent overwhelming the client with constant feedback requirements.
+* Run-through of the PWA during testing when sent to the client may be difficult as written instructions may be misinterpreted especially for a complex program such as this. To combat this issue, a visual/verbal set of instructions may make this more clear for hte client and thus setting up an online meeting would be useful
 
+## Quality Assurance Checklist
 
+|Aspect|About|
+|---|---|
+|[Functionality](01.Functionality.md)|Checking if the program works as required or stated previously|
+|[Usability](02.Usability.md)|Check if the program is user friendly|
+|[Performance](03.Performance.md)|Check if the program runs fast and efficiently|
+|[Security](04.Security.md)|Check if the program is safe from threats and protects important data|
+|[Compatability and Responsiveness](05.Compatability%20and%20Responsiveness.md)|Check if the program works across browsers and devices|
+|[Code Quality and Maintainability](06.Code%20Quality%20and%20Maintainability.md)|Check that the code is functional and clean to follow|
+|[Testing](07.Testing.md)|Check that everything has been tested|
+|[Error Handling and Logging](08.Error%20Handling%20and%20Logging.md)|Check that the code is able to recover from failures and reset easily|
+|[Deployment and Version Control](09.Delpoyment%20and%20Version%20Control.md)|Check that the code is properly managed|
 
 6. Data dictionary describing the data structures and variables used. (See 17.08)
 
