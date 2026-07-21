@@ -1,13 +1,17 @@
-# Starting Point:
+# Producing and Implementing
 
-1. Flowchart algorithms describing the logic of your software solution
+---
+
+### Logic Flowchart
+
+![Flowchart](SE12-VS_Flowchart.png)
 
 2. How security is implemented within the code.
 
 3. Include relevant code snippets as part of your explanation.
 
 
-## [Back to Master](/at-3-e-portfolio-vismay-swami-attempt-3/Master_ePortfolio.md)
+##### [Back to Master](/at-3-e-portfolio-vismay-swami-attempt-3/Master_ePortfolio.md)
 
 ---
 
