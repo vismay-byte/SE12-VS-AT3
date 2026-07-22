@@ -89,7 +89,7 @@ Issues that may occur in communication include:
 |tankCapacity|Float|NNN.N|||Usable fuel capacity of the aircraft|144.0||
 |taxiFuel|Float|NN.N|||Fixed allowance for start, taxi, and run-up|3.0||
 |tripFuel|Float|NNN.N|||Fuel burned across all planned legs|18.4||
-|reserveFuel|Float|NN.N|||Reserve fuel; 30 min day VFR or 45 min night/marginal|12.0||
+|reserveFuel|Float|NN.N|||Reserve fuel (30 min day VFR or 45 min night/marginal)|12.0||
 |totalFuelRequired|Float|NNN.N|||taxiFuel + reipFuel + reserveFuel|33.4||
 |fuelSufficient|Boolean|True/False|||True if totalFuelCapactiy <= tankCapacity|true||
 |aircraftType|String|XXXXX|||Selected trainer aircraft profile|"C172"||
