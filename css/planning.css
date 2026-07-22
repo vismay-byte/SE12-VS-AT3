@@ -1,0 +1,820 @@
+/*
+  This file focuses on styling the route planner and navigation pages, 
+  including the route leg table, the map and its markers, 
+  and the save/load route panel.
+*/
+
+/*
+Styles for the route planner page.
+*/
+
+.view.route-page {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-4) var(--space-6);
+}
+
+.route-page__header {
+  margin-bottom: var(--space-2);
+}
+
+.route-page__heading {
+  font-size: var(--fs-h1);
+  margin: 0;
+}
+
+.route-page__heading:focus-visible {
+  outline: 3px solid var(--c-focus);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+
+.route-page__intro {
+  color: var(--c-text-muted);
+  max-width: 75ch;
+  margin: 0 0 var(--space-4) 0;
+}
+
+/*
+This styles the departure and arrival picker controls.
+*/
+
+.route-page__endpoints {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.route-page__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  color: var(--c-text-muted);
+  min-width: 220px;
+  flex: 1 1 220px;
+}
+
+.route-page__field select {
+  font: inherit;
+  font-size: var(--fs-body);
+  color: var(--c-text);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2);
+  min-height: 44px;
+}
+
+.route-page__field select:focus-visible {
+  outline: 3px solid var(--c-focus);
+  outline-offset: 1px;
+}
+
+.route-page__note {
+  background: color-mix(in srgb, var(--c-caution) 16%, var(--c-surface));
+  border: 1px solid var(--c-caution);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--fs-caption);
+  margin: 0 0 var(--space-3) 0;
+}
+
+/*
+This styles the summary strip that highlights key route values.
+*/
+
+.route-page__summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  margin-bottom: var(--space-3);
+  font-family: var(--font-data);
+  font-size: var(--fs-body);
+}
+
+.route-page__summary strong {
+  font-weight: 700;
+}
+
+.route-page__summary .route-summary__label {
+  color: var(--c-text-muted);
+  font-family: var(--font-body);
+  margin-right: var(--space-1);
+}
+
+/*
+This styles the route leg table and its row states.
+*/
+
+.route-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-4);
+}
+
+.route-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-body);
+  min-width: 640px;
+}
+
+.route-table caption {
+  text-align: left;
+}
+
+.route-table thead th {
+  text-align: left;
+  font-size: var(--fs-caption);
+  color: var(--c-text-muted);
+  font-weight: 600;
+  background: var(--c-surface);
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--c-border-strong);
+  white-space: nowrap;
+}
+
+.route-table tbody td {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--c-border);
+  vertical-align: middle;
+}
+
+.route-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.route-table tbody tr.route-row--endpoint {
+  background: var(--c-bg-raised);
+}
+
+.route-table tbody tr.route-row--incomplete td {
+  box-shadow: inset 3px 0 0 var(--c-caution);
+}
+
+.route-table tbody tr.route-row--invalid td {
+  box-shadow: inset 3px 0 0 var(--c-nogo);
+}
+
+.route-page__summary .route-summary__alert {
+  color: var(--c-nogo);
+}
+
+.route-row__index {
+  font-family: var(--font-data);
+  color: var(--c-text-muted);
+  width: 2.5em;
+}
+
+.route-row__point-name {
+  font-weight: 600;
+}
+
+.route-row__point-type {
+  display: block;
+  color: var(--c-text-muted);
+  font-size: var(--fs-caption);
+  font-weight: 400;
+}
+
+.route-row input[type="number"] {
+  font: inherit;
+  font-family: var(--font-data);
+  font-size: var(--fs-body);
+  color: var(--c-text);
+  background: var(--c-bg);
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2);
+  width: 6.5em;
+  min-height: 40px;
+}
+
+.route-row input[type="number"]:focus-visible {
+  outline: 3px solid var(--c-focus);
+  outline-offset: 1px;
+}
+
+/*
+This styles the auto-filled leg input, which is visually subdued to 
+show it is derived rather than manually edited.
+*/
+.route-row input[type="number"].route-row__input--auto {
+  color: var(--c-text-muted);
+  font-style: italic;
+}
+
+.route-row__actions {
+  display: flex;
+  gap: var(--space-1);
+  white-space: nowrap;
+}
+
+/*
+This styles the small icon-only action buttons used in each route row.
+*/
+.route-row__icon-btn {
+  min-width: 36px;
+  min-height: 36px;
+  padding: var(--space-1);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.route-row__icon-btn[disabled] {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/*
+This styles the destructive icon button used for removing a route entry.
+*/
+.route-row__icon-btn--danger {
+  color: var(--c-nogo);
+}
+
+.route-row__icon-btn--danger:hover,
+.route-row__icon-btn--danger:focus-visible {
+  border-color: var(--c-nogo);
+  background: color-mix(in srgb, var(--c-nogo) 12%, transparent);
+}
+
+/*
+This styles the control used to add a waypoint to the route.
+*/
+
+.route-page__add {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-3);
+}
+
+.route-page__add .route-page__field {
+  flex: 1 1 320px;
+}
+
+.route-page__add select {
+  font: inherit;
+  font-size: var(--fs-body);
+  color: var(--c-text);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2);
+  min-height: 44px;
+  width: 100%;
+}
+
+/* 
+  This styles the confirmation panel that appears after a waypoint is added to the route.
+*/
+
+.route-add-confirm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+  padding: var(--space-3);
+  background: color-mix(in srgb, var(--c-accent) 10%, var(--c-surface));
+  border: 1px solid var(--c-accent);
+  border-radius: var(--radius-md);
+}
+
+.route-add-confirm[hidden] {
+  display: none;
+}
+
+.route-add-confirm__text {
+  margin: 0;
+  font-weight: 600;
+}
+
+.route-add-confirm__actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+/*
+Styles for the navigation page map and side panel.
+*/
+
+/*
+Styles for the main navigation page layout.
+*/
+
+.view.nav-page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-4) var(--space-6);
+}
+
+.nav-page__header {
+  margin-bottom: var(--space-2);
+}
+
+.nav-page__heading {
+  font-size: var(--fs-h1);
+  margin: 0;
+}
+
+.nav-page__heading:focus-visible {
+  outline: 3px solid var(--c-focus);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+
+.nav-page__intro {
+  color: var(--c-text-muted);
+  max-width: 70ch;
+  margin: 0 0 var(--space-5) 0;
+}
+
+.nav-page__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr);
+  gap: var(--space-4);
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .nav-page__layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*
+Styles for the navigation map and its markers.
+*/
+
+.nav-page__map-wrap {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-top: 1px solid var(--c-border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3);
+}
+
+.nav-map {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-md);
+  background: var(--c-bg);
+}
+
+/* Control-zone / airspace boundary shapes */
+.nav-zone {
+  fill-opacity: 0.12;
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+}
+
+.nav-zone--primary-training {
+  fill: var(--c-accent);
+  stroke: var(--c-accent);
+}
+
+.nav-zone--avoid {
+  fill: var(--c-nogo);
+  stroke: var(--c-nogo);
+  fill-opacity: 0.16;
+}
+
+/* Waypoint markers — small, quiet, chart-style flags */
+.nav-waypoint__dot {
+  fill: var(--c-bg);
+  stroke: var(--c-text-muted);
+  stroke-width: 1.5;
+}
+
+.nav-waypoint__label {
+  font-family: var(--font-data);
+  font-size: 8px;
+  fill: var(--c-text-muted);
+}
+
+/* Aerodrome markers */
+.nav-marker {
+  cursor: pointer;
+}
+
+.nav-marker__shape {
+  stroke: var(--c-bg);
+  stroke-width: 1.5;
+}
+
+.nav-marker--primary-training .nav-marker__shape {
+  fill: var(--c-accent);
+}
+
+.nav-marker--regional-destination .nav-marker__shape {
+  fill: var(--c-go);
+}
+
+.nav-marker--training-area .nav-marker__shape {
+  fill: var(--c-caution);
+}
+
+.nav-marker--avoid .nav-marker__shape {
+  fill: var(--c-nogo);
+}
+
+.nav-marker__label {
+  font-family: var(--font-data);
+  font-weight: 700;
+  font-size: 11px;
+  fill: var(--c-text);
+}
+
+.nav-marker--selected .nav-marker__ring {
+  fill: none;
+  stroke: var(--c-focus);
+  stroke-width: 2;
+}
+
+.nav-marker:hover .nav-marker__shape,
+.nav-marker:focus-visible .nav-marker__shape {
+  stroke: var(--c-focus);
+}
+
+/* Legend below the map */
+.nav-map__legend {
+  list-style: none;
+  margin: var(--space-3) 0 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-4);
+  font-size: var(--fs-caption);
+  color: var(--c-text-muted);
+}
+
+.nav-map__legend li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.nav-map__legend-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+/*
+Styles for the navigation page side panel.
+*/
+
+.nav-page__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.nav-page__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  color: var(--c-text-muted);
+}
+
+.nav-page__field select {
+  font: inherit;
+  font-size: var(--fs-body);
+  color: var(--c-text);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2);
+  min-height: 44px;
+}
+
+.nav-page__field select:focus-visible {
+  outline: 3px solid var(--c-focus);
+  outline-offset: 1px;
+}
+
+.nav-page__subheading {
+  font-size: var(--fs-h3);
+  margin: 0 0 var(--space-2) 0;
+}
+
+/* Selected-aerodrome fact sheet */
+.nav-detail {
+  margin: 0;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-1) var(--space-3);
+  font-size: var(--fs-body);
+}
+
+.nav-detail dt {
+  color: var(--c-text-muted);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  align-self: baseline;
+}
+
+.nav-detail dd {
+  margin: 0;
+}
+
+.nav-detail__note {
+  grid-column: 1 / -1;
+  color: var(--c-text-muted);
+  font-size: var(--fs-caption);
+  border-top: 1px solid var(--c-border);
+  padding-top: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+/* Nearby-aerodrome / waypoint lists */
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.nav-list__item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+}
+
+.nav-list__item--empty {
+  color: var(--c-text-muted);
+  font-size: var(--fs-caption);
+  border-style: dashed;
+}
+
+.nav-list__main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.nav-list__title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.nav-list__name {
+  font-weight: 700;
+}
+
+.nav-list__note {
+  color: var(--c-text-muted);
+  font-size: var(--fs-caption);
+}
+
+.nav-list__meta {
+  flex-shrink: 0;
+  font-family: var(--font-data);
+  font-size: var(--fs-caption);
+  color: var(--c-text-muted);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.nav-list__select-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--c-accent);
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.nav-list__select-btn:hover,
+.nav-list__select-btn:focus-visible {
+  color: var(--c-accent-strong);
+}
+
+/* "Ready" badge for feature cards whose stage is actually built, replacing
+   the "Stage N" placeholder badge once a card is wired up to a real view. */
+.feature-card__stage--ready {
+  color: var(--c-go);
+  border-color: var(--c-go);
+}
+
+/*
+Styles for the save and load route panel.
+*/
+
+.save-load-panel {
+  margin-top: var(--space-4);
+  border-top: 1px solid var(--c-border);
+  padding-top: var(--space-4);
+}
+
+.save-load-panel__toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  font-size: var(--fs-body-lg);
+  font-weight: 700;
+  color: var(--c-text);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.save-load-panel__toggle:hover,
+.save-load-panel__toggle:focus-visible {
+  border-color: var(--c-accent);
+}
+
+.save-load-panel__toggle:focus-visible {
+  outline: 3px solid var(--c-focus);
+  outline-offset: 2px;
+}
+
+.save-load-panel__toggle-hint {
+  font-size: var(--fs-caption);
+  font-weight: 400;
+  color: var(--c-text-muted);
+  margin-right: auto;
+}
+
+.save-load-panel__body {
+  background: var(--c-bg-raised);
+  border: 1px solid var(--c-border);
+  border-top: none;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  padding: var(--space-4);
+}
+
+.save-load-panel__intro {
+  color: var(--c-text-muted);
+  max-width: 75ch;
+  margin: 0 0 var(--space-3) 0;
+}
+
+.save-load-panel__save-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.save-load-panel__save-row .route-page__field {
+  min-width: 220px;
+  flex: 1 1 220px;
+}
+
+.save-load-panel__save-row input[type="text"] {
+  font: inherit;
+  font-size: var(--fs-body);
+  color: var(--c-text);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2);
+  min-height: 44px;
+}
+
+.save-load-panel__save-row input[type="text"]:focus-visible {
+  outline: 3px solid var(--c-focus);
+  outline-offset: 1px;
+}
+
+.save-load-panel__note {
+  font-size: var(--fs-caption);
+  color: var(--c-text-muted);
+  margin: 0 0 var(--space-3) 0;
+}
+
+/*
+Styles for the saved-route list.
+*/
+
+.save-load-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.save-load-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+}
+
+.save-load-row__main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.save-load-row__name {
+  font-weight: 700;
+}
+
+.save-load-row__summary {
+  font-family: var(--font-data);
+  color: var(--c-text-muted);
+  font-size: var(--fs-caption);
+}
+
+.save-load-row__actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.save-load-row__delete {
+  color: var(--c-nogo);
+}
+
+.save-load-row__delete:hover,
+.save-load-row__delete:focus-visible {
+  border-color: var(--c-nogo);
+  background: color-mix(in srgb, var(--c-nogo) 12%, transparent);
+}
+
+/*
+Styles for the save/load self-test panel.
+*/
+
+.save-load-selftest {
+  margin-top: var(--space-3);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+}
+
+.save-load-selftest summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.save-load-selftest__summary {
+  display: inline-flex;
+  margin: var(--space-2) 0;
+}
+
+.save-load-selftest__list {
+  list-style: none;
+  margin: var(--space-2) 0 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.save-load-selftest__item {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
