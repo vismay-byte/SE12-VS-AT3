@@ -1,0 +1,735 @@
+
+/* 
+This section works on the styling for the wind triangle calculations which are utilised to 
+calculate the wind correction angle, ground speed and estimated time enroute.
+*/
+
+.wind-preview {
+  margin-top: var(--space-5);
+  border-top: 1px solid var(--c-border);
+  padding-top: var(--space-4);
+}
+
+.wind-preview__toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  font-size: var(--fs-body-lg);
+  font-weight: 700;
+  color: var(--c-text);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.wind-preview__toggle:hover,
+.wind-preview__toggle:focus-visible {
+  border-color: var(--c-accent);
+}
+
+.wind-preview__toggle:focus-visible {
+  outline: 3px solid var(--c-focus);
+  outline-offset: 2px;
+}
+
+.wind-preview__toggle-hint {
+  font-size: var(--fs-caption);
+  font-weight: 400;
+  color: var(--c-text-muted);
+  margin-right: auto;
+}
+
+/*
+This styles the chevron icon used to show whether the wind preview panel is open or collapsed.
+*/
+.wind-preview__toggle-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: transform var(--dur-med) var(--ease-panel);
+}
+
+.wind-preview__toggle[aria-expanded="true"] .wind-preview__toggle-icon {
+  transform: rotate(180deg);
+}
+
+.wind-preview__body {
+  background: var(--c-bg-raised);
+  border: 1px solid var(--c-border);
+  border-top: none;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  padding: var(--space-4);
+}
+
+.wind-preview__intro {
+  color: var(--c-text-muted);
+  max-width: 75ch;
+  margin: 0 0 var(--space-3) 0;
+}
+
+.wind-preview__inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.wind-preview__inputs .route-page__field {
+  min-width: 180px;
+  flex: 1 1 180px;
+}
+
+.wind-preview__inputs input[type="number"] {
+  font: inherit;
+  font-family: var(--font-data);
+  font-size: var(--fs-body);
+  color: var(--c-text);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2);
+  min-height: 44px;
+}
+
+.wind-preview__inputs input[type="number"]:focus-visible {
+  outline: 3px solid var(--c-focus);
+  outline-offset: 1px;
+}
+
+.wind-preview__note {
+  font-size: var(--fs-caption);
+  color: var(--c-text-muted);
+  margin: 0 0 var(--space-2) 0;
+}
+
+.wind-preview__note--warning {
+  color: var(--c-caution);
+}
+
+.wind-preview__fetch-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-2) 0;
+}
+
+#wind-preview-fetch-note {
+  font-size: var(--fs-caption);
+  color: var(--c-text-muted);
+  margin: 0;
+}
+
+.wind-preview-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  margin: var(--space-3) 0;
+}
+
+.wind-preview-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-body);
+  font-family: var(--font-data);
+  min-width: 560px;
+}
+
+.wind-preview-table thead th {
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: var(--fs-caption);
+  color: var(--c-text-muted);
+  font-weight: 600;
+  background: var(--c-surface);
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--c-border-strong);
+  white-space: nowrap;
+}
+
+.wind-preview-table tbody td {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--c-border);
+  vertical-align: middle;
+}
+
+.wind-preview-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/*
+This styles the row number column in the wind preview table.
+*/
+.wind-preview-row__index {
+  color: var(--c-text-muted);
+  width: 2.5em;
+}
+
+.wind-preview-row--incomplete td {
+  font-family: var(--font-body);
+  color: var(--c-text-muted);
+  font-style: italic;
+}
+
+.wind-preview-row--unflyable {
+  box-shadow: inset 3px 0 0 var(--c-nogo);
+}
+
+.wind-preview-selftest {
+  margin-top: var(--space-3);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+}
+
+.wind-preview-selftest summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/*
+This styles the self-test summary label that opens the expandable checklist details.
+*/
+.wind-preview-selftest__summary {
+  display: inline-flex;
+  margin: var(--space-2) 0;
+}
+
+.wind-preview-selftest__list {
+  list-style: none;
+  margin: var(--space-2) 0 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.wind-preview-selftest__item {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+.wind-preview-selftest__detail {
+  font-family: var(--font-data);
+  font-size: var(--fs-caption);
+  color: var(--c-text-muted);
+}
+
+/*
+  Sits directly under the wind-preview panel on the Route
+  Planner page and mirrors the wind-triangle fold-out
+  panel/table pattern.
+*/
+
+.time-eta-preview {
+  margin-top: var(--space-4);
+  border-top: 1px solid var(--c-border);
+  padding-top: var(--space-4);
+}
+
+.time-eta-preview__toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  font-size: var(--fs-body-lg);
+  font-weight: 700;
+  color: var(--c-text);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.time-eta-preview__toggle:hover,
+.time-eta-preview__toggle:focus-visible {
+  border-color: var(--c-accent);
+}
+
+.time-eta-preview__toggle:focus-visible {
+  outline: 3px solid var(--c-focus);
+  outline-offset: 2px;
+}
+
+.time-eta-preview__toggle-hint {
+  font-size: var(--fs-caption);
+  font-weight: 400;
+  color: var(--c-text-muted);
+  margin-right: auto;
+}
+
+.time-eta-preview__body {
+  background: var(--c-bg-raised);
+  border: 1px solid var(--c-border);
+  border-top: none;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  padding: var(--space-4);
+}
+
+.time-eta-preview__intro {
+  color: var(--c-text-muted);
+  max-width: 75ch;
+  margin: 0 0 var(--space-3) 0;
+}
+
+.time-eta-preview__inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.time-eta-preview__inputs .route-page__field {
+  min-width: 180px;
+  flex: 1 1 180px;
+}
+
+/* 
+  type="time" is a native browser control which restricts the 
+  combinations of time you can enter to valid HH:MM values
+*/
+
+.time-eta-preview__inputs input[type="time"] {
+  font: inherit;
+  font-family: var(--font-data);
+  font-size: var(--fs-body);
+  color: var(--c-text);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2);
+  min-height: 44px;
+}
+
+.time-eta-preview__inputs input[type="time"]:focus-visible {
+  outline: 3px solid var(--c-focus);
+  outline-offset: 1px;
+}
+
+.time-eta-preview__note {
+  font-size: var(--fs-caption);
+  color: var(--c-text-muted);
+  margin: 0 0 var(--space-2) 0;
+}
+
+.time-eta-preview-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  margin: var(--space-3) 0;
+}
+
+.time-eta-preview-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-body);
+  font-family: var(--font-data);
+  min-width: 560px;
+}
+
+.time-eta-preview-table thead th {
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: var(--fs-caption);
+  color: var(--c-text-muted);
+  font-weight: 600;
+  background: var(--c-surface);
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--c-border-strong);
+  white-space: nowrap;
+}
+
+.time-eta-preview-table tbody td {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--c-border);
+  vertical-align: middle;
+}
+
+.time-eta-preview-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/*
+This styles the row number column in the time and ETA preview table.
+*/
+.time-eta-row__index {
+  color: var(--c-text-muted);
+  width: 2.5em;
+}
+
+.time-eta-row--incomplete td {
+  font-family: var(--font-body);
+  color: var(--c-text-muted);
+  font-style: italic;
+}
+
+.time-eta-row--unflyable {
+  box-shadow: inset 3px 0 0 var(--c-nogo);
+}
+
+.time-eta-preview-selftest {
+  margin-top: var(--space-3);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+}
+
+.time-eta-preview-selftest summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.time-eta-preview-selftest__summary {
+  display: inline-flex;
+  margin: var(--space-2) 0;
+}
+
+.time-eta-preview-selftest__list {
+  list-style: none;
+  margin: var(--space-2) 0 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.time-eta-preview-selftest__item {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+.time-eta-preview-selftest__detail {
+  font-family: var(--font-data);
+  font-size: var(--fs-caption);
+  color: var(--c-text-muted);
+}
+
+/*
+This section styles the fuel preview panel, which sits directly under the time
+and ETA preview panel and presents the calculated fuel requirements and verdict.
+*/
+
+.fuel-preview {
+  margin-top: var(--space-4);
+  border-top: 1px solid var(--c-border);
+  padding-top: var(--space-4);
+}
+
+.fuel-preview__toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  font-size: var(--fs-body-lg);
+  font-weight: 700;
+  color: var(--c-text);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.fuel-preview__toggle:hover,
+.fuel-preview__toggle:focus-visible {
+  border-color: var(--c-accent);
+}
+
+.fuel-preview__toggle:focus-visible {
+  outline: 3px solid var(--c-focus);
+  outline-offset: 2px;
+}
+
+.fuel-preview__toggle-hint {
+  font-size: var(--fs-caption);
+  font-weight: 400;
+  color: var(--c-text-muted);
+  margin-right: auto;
+}
+
+.fuel-preview__body {
+  background: var(--c-bg-raised);
+  border: 1px solid var(--c-border);
+  border-top: none;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  padding: var(--space-4);
+}
+
+.fuel-preview__intro {
+  color: var(--c-text-muted);
+  max-width: 75ch;
+  margin: 0 0 var(--space-3) 0;
+}
+
+.fuel-preview__inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.fuel-preview__inputs .route-page__field {
+  min-width: 220px;
+  flex: 1 1 220px;
+}
+
+.fuel-preview__inputs select {
+  font: inherit;
+  font-size: var(--fs-body);
+  color: var(--c-text);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2);
+  min-height: 44px;
+}
+
+.fuel-preview__inputs select:focus-visible {
+  outline: 3px solid var(--c-focus);
+  outline-offset: 1px;
+}
+
+.fuel-preview__note {
+  font-size: var(--fs-caption);
+  color: var(--c-text-muted);
+  margin: 0 0 var(--space-2) 0;
+}
+
+.fuel-preview__figures {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-3);
+  margin: var(--space-3) 0;
+  padding: var(--space-3);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-data);
+}
+
+/*
+This styles each individual fuel figure card inside the summary grid.
+*/
+.fuel-preview__figures > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/*
+This styles the small label text shown above each fuel figure.
+*/
+.fuel-preview__label {
+  font-family: var(--font-body);
+  font-size: var(--fs-caption);
+  color: var(--c-text-muted);
+}
+
+/*
+This styles the main verdict text that summarises whether the fuel plan is acceptable.
+*/
+.fuel-preview__verdict {
+  font-size: var(--fs-body-lg);
+}
+
+.fuel-preview-selftest {
+  margin-top: var(--space-3);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+}
+
+.fuel-preview-selftest summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.fuel-preview-selftest__summary {
+  display: inline-flex;
+  margin: var(--space-2) 0;
+}
+
+.fuel-preview-selftest__list {
+  list-style: none;
+  margin: var(--space-2) 0 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.fuel-preview-selftest__item {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+.fuel-preview-selftest__detail {
+  font-family: var(--font-data);
+  font-size: var(--fs-caption);
+  color: var(--c-text-muted);
+}
+
+/*
+This section styles the NAVLOG page, which builds on the route planner layout and
+adds the table, summary figures, and export controls for the completed log.
+*/
+
+.view.navlog-page {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-4) var(--space-6);
+}
+
+.navlog-page__inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.navlog-page__inputs input,
+.navlog-page__inputs select {
+  font: inherit;
+  font-family: var(--font-data);
+  font-size: var(--fs-body);
+  color: var(--c-text);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2);
+  min-height: 44px;
+}
+
+.navlog-page__inputs input:focus-visible,
+.navlog-page__inputs select:focus-visible {
+  outline: 3px solid var(--c-focus);
+  outline-offset: 1px;
+}
+
+.navlog-page__note {
+  font-size: var(--fs-caption);
+  color: var(--c-text-muted);
+  margin: 0 0 var(--space-2) 0;
+}
+
+/*
+This section styles the NAVLOG table row states so incomplete and unflyable rows
+are visually highlighted in the same way as the preview panels.
+*/
+
+.navlog-table {
+  min-width: 900px;
+}
+
+.navlog-row--incomplete td,
+.navlog-row--unflyable td {
+  font-style: italic;
+  color: var(--c-text-muted);
+}
+
+.navlog-row--incomplete td {
+  box-shadow: inset 3px 0 0 var(--c-caution);
+}
+
+.navlog-row--unflyable td {
+  box-shadow: inset 3px 0 0 var(--c-nogo);
+}
+
+/*
+This section styles the summary figures grid, which presents key totals such as
+distance, time, and fuel in a compact set of value cards.
+*/
+
+.navlog-page__summary-figures {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-3);
+  margin: var(--space-3) 0 var(--space-4) 0;
+  padding: var(--space-3);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-data);
+}
+
+.navlog-page__summary-figures > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/*
+This styles the small label text shown above each NAVLOG summary value.
+*/
+.navlog-page__summary-label {
+  font-family: var(--font-body);
+  font-size: var(--fs-caption);
+  color: var(--c-text-muted);
+}
+
+.navlog-page__summary-figures p.navlog-page__note {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+/*
+This section styles the PDF export row, which keeps the export and save actions
+aligned with the flown-on field for the completed NAVLOG.
+*/
+
+.navlog-page__export-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.navlog-page__export-row .btn[disabled] {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+#navlog-pdf-note,
+#navlog-save-logbook-note {
+  margin: 0;
+}
+
+/*
+This styles the row that holds the flown-on date input for the NAVLOG page.
+*/
+.navlog-page__flown-on-field {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.navlog-page__flown-on-field input[type="date"] {
+  font: inherit;
+  font-family: var(--font-data);
+  font-size: var(--fs-body);
+  color: var(--c-text);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2);
+  min-height: 44px;
+}
+
+.navlog-page__flown-on-field input[type="date"]:focus-visible {
+  outline: 3px solid var(--c-focus);
+  outline-offset: 1px;
+}

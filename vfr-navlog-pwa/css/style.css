@@ -1,0 +1,776 @@
+/*
+  This establishes the tablet-priority layout and spacing scale due to main audiences using these devices
+  more commonly to complete such tasks. A light and dark theme is established to allow an option for ground 
+  and in-air use. The dark theme is defaulted to due to the fact that it is more common for pilots to use 
+  the app in a dark environment and the light theme is more suited for ground use.
+*/
+
+/*
+Shared design tokens and theme variables.
+*/
+
+:root {
+  /* Panel (dark / night) — default theme */
+  /* --c is used due to the change in themes which are possible to later feed into "var" functions for the design of the cards dependant on theme*/
+  --c-bg: #0B1420;
+  --c-bg-raised: #0F1C2B;
+  --c-surface: #142A3D;
+  --c-surface-raised: #1C3650;
+  --c-border: rgba(244, 241, 234, 0.14);
+  --c-border-strong: rgba(244, 241, 234, 0.28);
+  --c-text: #F4F1EA;
+  --c-text-muted: #9FB3C4;
+  --c-accent: #E8A33D;
+  --c-accent-strong: #FFC15C;
+  --c-accent-ink: #1A1200;
+  --c-go: #4FA37B;
+  --c-caution: #E8A33D;
+  --c-nogo: #E2584B;
+  --c-focus: #FFC15C;
+  --c-shadow: rgba(0, 0, 0, 0.45);
+
+  /* Type */
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-body);
+  --font-data: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Consolas, monospace;
+
+  --fs-caption: clamp(0.72rem, 0.69rem + 0.12vw, 0.82rem);
+  --fs-body: clamp(0.95rem, 0.91rem + 0.15vw, 1.05rem);
+  --fs-body-lg: clamp(1.05rem, 1rem + 0.2vw, 1.18rem);
+  --fs-h3: clamp(1.15rem, 1.06rem + 0.4vw, 1.35rem);
+  --fs-h2: clamp(1.5rem, 1.3rem + 0.8vw, 1.9rem);
+  --fs-h1: clamp(1.9rem, 1.6rem + 1.6vw, 2.6rem);
+  --lh-tight: 1.2;
+  --lh-body: 1.55;
+  --tracking-eyebrow: 0.12em;
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+  --space-6: 64px;
+
+  /* Shape */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  /* Motion */
+  --ease-panel: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-fast: 120ms;
+  --dur-med: 220ms;
+}
+
+/* Day VFR (light) theme — aged sectional-chart paper, tuned for glare */
+:root[data-theme="light"] {
+  --c-bg: #EAE3D2;
+  --c-bg-raised: #F2ECDE;
+  --c-surface: #F8F4E9;
+  --c-surface-raised: #FFFFFF;
+  --c-border: rgba(27, 36, 26, 0.16);
+  --c-border-strong: rgba(27, 36, 26, 0.3);
+  --c-text: #1B2A22;
+  --c-text-muted: #52604F;
+  --c-accent: #8A5300;
+  --c-accent-strong: #6B4000;
+  --c-accent-ink: #FFF7E8;
+  --c-go: #226B45;
+  --c-caution: #8A5300;
+  --c-nogo: #A32E20;
+  --c-focus: #6B4000;
+  --c-shadow: rgba(27, 26, 20, 0.22);
+}
+
+/*
+This sets the shared reset and base typography rules for the app.
+*/
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  color-scheme: dark;
+}
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
+body {
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  min-height: 100vh;
+  transition: background-color var(--dur-med) var(--ease-panel),
+              color var(--dur-med) var(--ease-panel);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: var(--lh-tight);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: inherit;
+}
+
+/* Tabular data / instrument-readout treatment: any numeric value on the
+   NAVLOG, frequencies, coordinates, times, etc. should carry this class in
+   later stages so figures align like a real panel readout. */
+.data,
+.data-inline {
+  font-family: var(--font-data);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: var(--fs-caption);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  color: var(--c-text-muted);
+}
+
+/*
+This sets the shared motion and focus behaviour for keyboard and reduced-motion users.
+*/
+
+:focus-visible {
+  outline: 3px solid var(--c-focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important; /* !important effectively disables animations by taking precedence over previous counts*/
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--c-accent);
+  color: var(--c-accent-ink);
+  padding: var(--space-2) var(--space-3);
+  border-radius: 0 0 var(--radius-sm) 0;
+  z-index: 100;
+  font-weight: 700;
+}
+.skip-link:focus {
+  left: 0;
+  top: 0;
+}
+
+/* Visually hidden but still readable by screen readers — e.g. a table
+   header cell for a row of icon-only action buttons. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/*
+This styles the shared app header and brand area.
+*/
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* aligns items along the main axis of a container*/
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--c-border);
+  background: var(--c-bg-raised);
+}
+
+/*
+This styles the clickable header brand block that returns the user to the home view.
+*/
+.app-header__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  padding: 0;
+  margin: -8px -12px 0 -12px;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--dur-fast) var(--ease-panel);
+}
+
+.app-header__brand:hover,
+.app-header__brand:focus-visible {
+  background: color-mix(in srgb, var(--c-accent) 12%, transparent);
+  outline: none;
+}
+
+.app-header__brand:focus-visible {
+  outline: 2px solid var(--c-focus);
+  outline-offset: 2px;
+}
+
+.app-header__logo {
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  color: var(--c-accent);
+}
+
+.app-header__title {
+  margin: 0;
+  font-size: var(--fs-body-lg);
+  font-weight: 700;
+}
+
+.app-header__subtitle {
+  margin: 0;
+  font-size: var(--fs-caption);
+  color: var(--c-text-muted);
+}
+
+.app-header__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+/*
+Styles for the shared button primitive used across the app.
+*/
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font: inherit;
+  font-weight: 600;
+  font-size: var(--fs-body);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  min-height: 44px;
+  min-width: 44px;
+  border: 1px solid var(--c-border-strong);
+  background: transparent;
+  color: var(--c-text);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-panel),
+              border-color var(--dur-fast) var(--ease-panel),
+              transform var(--dur-fast) var(--ease-panel); /* var allows for the flexible transition of the button to be changed in the future if needed*/
+}
+
+.btn--ghost:hover,
+.btn--ghost:focus-visible {
+  background: color-mix(in srgb, var(--c-text) 8%, transparent);
+  border-color: var(--c-accent);
+}
+
+.btn--primary {
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  color: var(--c-accent-ink);
+}
+
+.btn--primary:hover,
+.btn--primary:focus-visible {
+  background: var(--c-accent-strong);
+  border-color: var(--c-accent-strong);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/*
+Styles for the theme toggle switch and its panel-style lighting metaphor.
+*/
+
+.lighting-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.lighting-toggle__label {
+  font-size: var(--fs-caption);
+  color: var(--c-text-muted);
+  white-space: nowrap;
+}
+
+.switch {
+  --switch-w: 64px;
+  --switch-h: 32px;
+  position: relative;
+  width: var(--switch-w);
+  height: var(--switch-h);
+  padding: 3px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--c-border-strong);
+  background: linear-gradient(180deg, var(--c-bg-raised), var(--c-surface));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), inset 0 -1px 3px var(--c-shadow);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.switch__track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: calc(var(--radius-sm) - 2px);
+  background: var(--c-bg);
+  overflow: hidden;
+}
+
+.switch__glyphs {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+  pointer-events: none;
+}
+
+.switch__glyphs svg {
+  width: 12px;
+  height: 12px;
+  color: var(--c-text-muted);
+  opacity: 0.7;
+}
+
+.switch__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: calc(var(--switch-h) - 4px - 6px);
+  height: calc(var(--switch-h) - 4px - 6px);
+  border-radius: 4px;
+  background: var(--c-accent);
+  box-shadow: 0 0 6px 1px color-mix(in srgb, var(--c-accent) 60%, transparent),
+              0 1px 2px var(--c-shadow);
+  transition: transform var(--dur-med) var(--ease-panel), background-color var(--dur-med) var(--ease-panel);
+}
+
+/* Default (no explicit theme yet) and dark = thumb parked right ("NIGHT") */
+.switch[aria-checked="true"] .switch__thumb {
+  transform: translateX(calc(var(--switch-w) - var(--switch-h)));
+}
+
+.switch[aria-checked="false"] .switch__thumb {
+  background: var(--c-text-muted);
+  box-shadow: 0 1px 2px var(--c-shadow);
+}
+
+.switch:focus-visible {
+  outline: 3px solid var(--c-focus);
+  outline-offset: 2px;
+}
+
+/*
+This styles the main home page layout and introduction text.
+*/
+
+.home {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-4) var(--space-6);
+}
+
+.home__heading {
+  margin: 0 0 var(--space-2) 0;
+  font-size: var(--fs-h1);
+}
+
+.home__lede {
+  margin: 0 0 var(--space-5) 0;
+  color: var(--c-text-muted);
+  max-width: 60ch;
+  font-size: var(--fs-body-lg);
+}
+
+/*
+This styles the feature cards shown on the home page.
+*/
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: var(--space-3);
+}
+
+.feature-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  background: var(--c-surface); 
+  border: 1px solid var(--c-border);
+  border-top: 1px solid var(--c-border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  min-height: 132px;
+  text-decoration: none;
+  color: var(--c-text);
+  transition: border-color var(--dur-fast) var(--ease-panel),
+              background-color var(--dur-fast) var(--ease-panel),
+              transform var(--dur-fast) var(--ease-panel);
+}
+
+.feature-card:hover,
+.feature-card:focus-visible {
+  border-color: var(--c-accent);
+  background: var(--c-surface-raised);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .feature-card:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.feature-card__icon {
+  width: 28px;
+  height: 28px;
+  color: var(--c-accent);
+}
+
+.feature-card__title {
+  font-weight: 700;
+  font-size: var(--fs-h3);
+}
+
+.feature-card__desc {
+  color: var(--c-text-muted);
+  font-size: var(--fs-body);
+  margin: 0;
+}
+
+.feature-card__stage {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  font-family: var(--font-data);
+  font-size: var(--fs-caption);
+  color: var(--c-text-muted);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  padding: 1px 6px;
+}
+
+/*
+Styles for the shared status chips used for Go, Caution, and No-Go states.
+*/
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--fs-caption);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+
+.chip--go {
+  color: var(--c-go);
+  border-color: var(--c-go);
+  background: color-mix(in srgb, var(--c-go) 14%, transparent);
+}
+
+.chip--caution {
+  color: var(--c-caution);
+  border-color: var(--c-caution);
+  background: color-mix(in srgb, var(--c-caution) 14%, transparent);
+}
+
+.chip--nogo {
+  color: var(--c-nogo);
+  border-color: var(--c-nogo);
+  background: color-mix(in srgb, var(--c-nogo) 14%, transparent);
+}
+
+/*
+Styles for the shared validation state and error message for invalid inputs.
+*/
+
+input[aria-invalid="true"],
+select[aria-invalid="true"] {
+  border-color: var(--c-nogo) !important;
+  background: color-mix(in srgb, var(--c-nogo) 8%, var(--c-surface)) !important;
+}
+
+input[aria-invalid="true"]:focus-visible,
+select[aria-invalid="true"]:focus-visible {
+  outline-color: var(--c-nogo);
+}
+
+/*
+This styles the inline validation message shown beneath an invalid form field.
+*/
+.field-error {
+  display: block;
+  margin: var(--space-1) 0 0 0;
+  color: var(--c-nogo);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+}
+
+.field-error:empty {
+  display: none;
+}
+
+/*
+This styles the shared app footer.
+*/
+
+.app-footer {
+  text-align: center;
+  color: var(--c-text-muted);
+  font-size: var(--fs-caption);
+  padding: var(--space-4);
+  border-top: 1px solid var(--c-border);
+}
+
+/*
+Styles for the temporary toast notification used for short status messages.
+*/
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-4);
+  transform: translateX(-50%);
+  background: var(--c-surface-raised);
+  border: 1px solid var(--c-accent);
+  color: var(--c-text);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 16px var(--c-shadow);
+  font-size: var(--fs-body);
+  max-width: 90vw;
+}
+
+.toast[hidden] {
+  display: none;
+}
+
+/*
+This styles the authentication dialog used by the app.
+*/
+
+.auth-dialog {
+  width: min(400px, 92vw);
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  background: var(--c-surface);
+  color: var(--c-text);
+  box-shadow: 0 12px 32px var(--c-shadow);
+}
+
+.auth-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.auth-dialog__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+}
+
+.auth-dialog__header h2 {
+  font-size: var(--fs-h3);
+}
+
+.auth-dialog__note {
+  margin-top: var(--space-3);
+  color: var(--c-text-muted);
+  font-size: var(--fs-caption);
+}
+
+.auth-tabs {
+  display: flex;
+  gap: var(--space-1);
+  border-bottom: 1px solid var(--c-border);
+  margin-bottom: var(--space-3);
+}
+
+.auth-tabs__tab {
+  flex: 1;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--c-text-muted);
+  font: inherit;
+  font-weight: 600;
+  padding: var(--space-2);
+  cursor: pointer;
+  min-height: 44px;
+}
+
+.auth-tabs__tab[aria-selected="true"] {
+  color: var(--c-accent);
+  border-bottom-color: var(--c-accent);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.auth-form[hidden] {
+  display: none;
+}
+
+.auth-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  color: var(--c-text-muted);
+}
+
+.auth-form__optional {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.auth-form__field input {
+  font: inherit;
+  font-size: var(--fs-body);
+  color: var(--c-text);
+  background: var(--c-bg);
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2);
+  min-height: 44px;
+}
+
+.auth-form__field input:focus-visible {
+  outline: 3px solid var(--c-focus);
+  outline-offset: 1px;
+}
+
+.auth-form .btn {
+  align-self: flex-start;
+}
+
+.auth-form__hint {
+  margin: 0;
+  color: var(--c-text-muted);
+  font-size: var(--fs-caption);
+}
+
+.link-button {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: var(--space-2) 0;
+  min-height: 44px;
+  color: var(--c-accent);
+  font: inherit;
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link-button:hover,
+.link-button:focus-visible {
+  color: var(--c-accent-strong);
+}
+
+.auth-error {
+  margin: 0;
+  color: var(--c-nogo);
+  font-size: var(--fs-caption);
+  min-height: 1em;
+}
+
+.auth-error:empty {
+  display: none;
+}
+
+.password-checklist {
+  list-style: none;
+  margin: calc(var(--space-2) * -1) 0 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.password-checklist__item {
+  position: relative;
+  padding-left: 22px;
+  font-size: var(--fs-caption);
+  color: var(--c-text-muted);
+}
+
+.password-checklist__item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1.5px solid var(--c-border-strong);
+  background: transparent;
+}
+
+.password-checklist__item--met {
+  color: var(--c-go);
+}
+
+.password-checklist__item--met::before {
+  border-color: var(--c-go);
+  background: var(--c-go);
+}
+
+.password-checklist__item--met::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 6px;
+  width: 8px;
+  height: 4px;
+  border-left: 1.5px solid var(--c-bg);
+  border-bottom: 1.5px solid var(--c-bg);
+  transform: rotate(-45deg);
+}
