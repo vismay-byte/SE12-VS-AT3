@@ -39,7 +39,7 @@ export function getLastComputedNavlog() {
 }
 
 // The PDF helpers live at module scope so the logbook can rebuild the same document later.
-
+// Link to external API since PDF generation requires a real library
 const JSPDF_CDN_URL = "https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js";
 let jsPdfLoadPromise = null;
 
@@ -49,6 +49,8 @@ export function loadJsPdfConstructor() {
   if (typeof window === "undefined") {
     return Promise.reject(new Error("No window. jsPDF needs a browser."));
   }
+
+  //This is not a dynamic import because jsPDF links intself to windows.jspdf
   if (window.jspdf && window.jspdf.jsPDF) {
     return Promise.resolve(window.jspdf.jsPDF);
   }
@@ -71,7 +73,7 @@ export function loadJsPdfConstructor() {
     };
     document.head.appendChild(script);
   });
-  return jsPdfLoadPromise;
+  return jsPdfLoadPromise; // This ensures that by clicking the button twice whilst installing doesn't re-download the file
 }
 
 // Pads to a fixed column width so a plain monospaced text table lines up
@@ -81,6 +83,9 @@ function padCol(str, width) {
   return s.length >= width ? s.slice(0, width) : s.padEnd(width);
 }
 
+/* The API is intentionally low-level and thus we are issuing drawing commands
+  onto a blank canvas by points. 
+  */
 const PDF_COLS = [
   { key: "i", label: "#", width: 4 },
   { key: "leg", label: "Leg", width: 30 },
@@ -96,11 +101,14 @@ const PDF_COLS = [
   { key: "fuelRem", label: "Fuel rem.", width: 10 }
 ];
 
+// Manual padding here
 function pdfRowLine(values) {
   return PDF_COLS.map((col) => padCol(values[col.key] !== undefined ? values[col.key] : "", col.width)).join("");
 }
 
 // Builds the PDF document for a computed NAVLOG result or a saved logbook snapshot.
+// This function builds a 'fake' table with the use of a monospace font and manual column padding
+
 export function buildNavlogPdfDoc(jsPDF, data) {
   const doc = new jsPDF({ unit: "pt", format: "a4" });
   const depLabel = data.dep ? data.dep.icao : data.route.departureIcao;
@@ -133,6 +141,7 @@ export function buildNavlogPdfDoc(jsPDF, data) {
   doc.line(40, y, 555, y);
   y += 12;
 
+  /* By using a font like courier, we are able to have a set number of characters per line and this character count establishes the width of the rows*/
   doc.setFont("courier", "normal");
   data.rows.forEach((row, i) => {
     const leg = row.leg;
@@ -156,9 +165,11 @@ export function buildNavlogPdfDoc(jsPDF, data) {
         fuelRem: row.fuelRemainingL.toFixed(1)
       });
     }
+
+    // Manually accounts for page overflow where a new page is started if a certain length is reached
     if (y > 780) {
       doc.addPage();
-      y = 40;
+      y = 40; // Sets margin for a new vertical page
     }
     doc.text(line, 40, y);
     y += 13;
@@ -187,10 +198,12 @@ export function buildNavlogPdfDoc(jsPDF, data) {
     { maxWidth: 515 }
   );
 
+  // Returns in the same shape as computeNavlogData because the PDF is a second renderer of the same result and thus, the logbook trips can also be exported as a PDF later
   return { doc, filename: "navlog-" + depLabel + "-" + arrLabel + ".pdf" };
+
 }
 
-// The saved flight snapshot keeps only the data needed to rebuild a PDF later.
+// The saved flight snapshot keeps only the data needed to rebuild a PDF later and saves it to SupaBase
 
 export function buildFlightSnapshot(data) {
   return {
@@ -414,7 +427,6 @@ export async function saveFlightToLogbook(data, flownOnDate) {
   }
 
   // computeNavlogData() builds the full table data and totals before the DOM renderer formats it.
-
   async function computeNavlogData() {
     const tasCheck = validateTas(tasInput.value);
     const windDirCheck = validateWindDir(windDirInput.value);
