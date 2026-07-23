@@ -19,8 +19,7 @@ export function distanceNm(a, b) {
   const lat1 = toRad(a.lat);
   const lat2 = toRad(b.lat);
   const h =
-    Math.sin(dLat / 2) ** 2 +
-    Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2;
+    Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2; // Since lat and lon are on a spherical surface, straight line distance is wrong if you use those same values. Therefore, use haversine formula (searched online)
   return 2 * EARTH_RADIUS_NM * Math.asin(Math.sqrt(h));
 }
 
@@ -31,8 +30,7 @@ export function bearingTrue(a, b) {
   const dLon = toRad(b.lon - a.lon);
   const y = Math.sin(dLon) * Math.cos(lat2);
   const x =
-    Math.cos(lat1) * Math.sin(lat2) -
-    Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
+    Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon); // Same issue as above occurs due to the lat and lon on a spherical surface. Therefore, we use azimuth formula (searched online)
   return (toDeg(Math.atan2(y, x)) + 360) % 360;
 }
 
@@ -68,10 +66,13 @@ export function applyFieldCheck(input, errorEl, check) {
 }
 
 // Returns a missing, invalid, or valid result for a numeric field based on its range.
+// This is the input validation for the numeric inputs in all files
 export function numericFieldCheck(val, { min, max, rangeMessage }) {
   if (val === null || val === undefined || (typeof val === "string" && val.trim() === "")) {
     return { state: "missing" };
   }
+
+  // 3 states for 3 cases
   const num = typeof val === "number" ? val : parseFloat(val);
   if (isNaN(num) || !isFinite(num)) {
     return { state: "invalid", message: "Enter a number." };
