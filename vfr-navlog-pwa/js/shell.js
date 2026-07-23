@@ -2,6 +2,14 @@
 // (BUG-04: the custom "Install app" button was removed — Safari/iOS and Firefox never fire
 // beforeinstallprompt at all, so the button never appeared there
 
+
+/* 3 small jobs which are unrelated but must be immediately ready and thus loads before anything else on that page
+  These functions include:
+  1. Theme toggle. This reads/writes the theme key and flips the data-theme attribute in html
+  2. View switching/Lazy loading --> hides every view element except the requested one
+  3. Service worker registration. This is what turns the service worker into an offlice cache without installation required
+*/
+
 (function () {
   "use strict";
 
@@ -63,6 +71,7 @@
   };
   const loadedModules = new Set();
 
+  // This is what prevents the downloading of the Route-Planner bundle if the student solely opens the Checklists page 
   function loadViewModules(id) {
     const paths = VIEW_MODULES[id];
     if (!paths) {
