@@ -77,6 +77,9 @@ import { toRad, distanceNm, bearingTrue, escapeHtml } from "./shared-utils.js";
 
   // The map projection is local; the distance and bearing helpers come from shared utilities.
 
+  /* Scans every aerodrome, way point, and control zone to find the min/max
+    latitude/longtitude. Thsi forms the box that we use to project
+  */
   function computeBounds() {
     const lats = [];
     const lons = [];
@@ -102,16 +105,18 @@ import { toRad, distanceNm, bearingTrue, escapeHtml } from "./shared-utils.js";
     };
   }
 
-  // Equirectangular-style projector: longitude scaled by cos(midLatitude)
-  // so shapes/spacing look right despite the basin's north-south spread.
+  /* Equirectangular-style projector: longitude scaled by cos(midLatitude)
+   so shapes/spacing look right despite the basin's north-south spread.
+   Builds a flat projection of otherwise spherical coords (SVG)
+   */
   function makeProjector(bounds) {
     const latMid = (bounds.latMin + bounds.latMax) / 2;
-    const cosLat = Math.cos(toRad(latMid));
+    const cosLat = Math.cos(toRad(latMid)); // near the equator, there is 1 degree of long. and lat. cover because lines converge towards poles
     const lonSpan = Math.max((bounds.lonMax - bounds.lonMin) * cosLat, 0.0001);
     const latSpan = Math.max(bounds.latMax - bounds.latMin, 0.0001);
     const availW = VIEW_W - PADDING * 2;
     const availH = VIEW_H - PADDING * 2;
-    const scale = Math.min(availW / lonSpan, availH / latSpan);
+    const scale = Math.min(availW / lonSpan, availH / latSpan); // This is used to scale the map so that it fits within the screen without distortion
     const usedW = lonSpan * scale;
     const usedH = latSpan * scale;
     const offsetX = PADDING + (availW - usedW) / 2;
@@ -126,12 +131,15 @@ import { toRad, distanceNm, bearingTrue, escapeHtml } from "./shared-utils.js";
 
   // The marker helpers build the SVG shapes used for the map.
 
+  // the document is where the SVG elements are created
   function svgEl(tag, attrs) {
     const el = document.createElementNS("http://www.w3.org/2000/svg", tag);
     Object.keys(attrs).forEach((k) => el.setAttribute(k, attrs[k]));
     return el;
   }
 
+  /* Triangles and diamongs are regular polygons which are created by moving a pen arount evenly-spaced angles around a centre
+    This builds the shapes within a circle */
   function polygonPoints(cx, cy, r, sides, rotationDeg) {
     const pts = [];
     for (let i = 0; i < sides; i++) {
@@ -141,6 +149,7 @@ import { toRad, distanceNm, bearingTrue, escapeHtml } from "./shared-utils.js";
     return pts.join(" ");
   }
 
+  // decides whether to create a circle, triangle, or diamond based on the role of the element using the lookup table
   function buildMarkerShape(shape, cx, cy, r) {
     if (shape === "triangle") {
       return svgEl("polygon", {
