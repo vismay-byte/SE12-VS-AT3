@@ -25,6 +25,9 @@ Built as a client-side PWA (HTML, CSS, JavaScript) with a service worker for off
 - `vfr-navlog-pwa/` - the actual application source code.
 - `Journal.md` - weekly development journal.
 
+## Link to Project
+
+This project is up on gitlab but has also been securely launched via github pages. See here: [SE12 AT3 - VFR PWA](https://vismay-byte.github.io/SE12-VS-AT3/)
 
 ---
 
