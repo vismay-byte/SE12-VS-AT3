@@ -1362,9 +1362,9 @@ function runTimeEteSelfTests(tolerance = 0.01) {
 
   function renderSelfTests() {
     renderSelfTestList(selfTestList, selfTestSummary, runTimeEteSelfTests(), {
-      itemClass: "time-eta-selftest__item",
-      detailClass: "time-eta-selftest__detail",
-      summaryClass: "time-eta-selftest__summary",
+      itemClass: "time-eta-preview-selftest__item",
+      detailClass: "time-eta-preview-selftest__detail",
+      summaryClass: "time-eta-preview-selftest__summary",
       renderDetail: (r) => "expected " + JSON.stringify(r.expected) + ", got " + JSON.stringify(r.actual)
     });
   }

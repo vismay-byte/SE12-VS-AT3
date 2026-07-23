@@ -7,28 +7,18 @@ import { supabase } from "./supabase-client.js";
 const dialog = document.getElementById("auth-dialog");
 const accountBtn = document.getElementById("account-btn");
 const closeBtn = document.getElementById("auth-dialog-close");
-const tabsWrapper = document.getElementById("auth-tabs");
 const tabLogin = document.getElementById("auth-tab-login");
 const tabSignup = document.getElementById("auth-tab-signup");
 
 const loginForm = document.getElementById("login-form");
 const signupForm = document.getElementById("signup-form");
-const forgotForm = document.getElementById("forgot-form");
-const resetForm = document.getElementById("reset-form");
-const ALL_FORMS = [loginForm, signupForm, forgotForm, resetForm];
+const ALL_FORMS = [loginForm, signupForm];
 
 const loginError = document.getElementById("login-error");
 const signupError = document.getElementById("signup-error");
-const forgotError = document.getElementById("forgot-error");
-const resetError = document.getElementById("reset-error");
-
-const forgotPasswordLink = document.getElementById("forgot-password-link");
-const forgotBackBtn = document.getElementById("forgot-back");
 
 const signupPasswordInput = document.getElementById("signup-password");
 const passwordChecklist = document.getElementById("password-checklist");
-const resetPasswordInput = document.getElementById("reset-password");
-const resetPasswordChecklist = document.getElementById("reset-password-checklist");
 
 let currentUser = null;
 
@@ -63,9 +53,6 @@ function updatePasswordChecklist(inputEl, checklistEl) {
 signupPasswordInput.addEventListener("input", () =>
   updatePasswordChecklist(signupPasswordInput, passwordChecklist)
 );
-resetPasswordInput.addEventListener("input", () =>
-  updatePasswordChecklist(resetPasswordInput, resetPasswordChecklist)
-);
 
 function showToast(message) {
   if (window.showToast) window.showToast(message);
@@ -74,22 +61,18 @@ function showToast(message) {
 function clearErrors() {
   loginError.textContent = "";
   signupError.textContent = "";
-  forgotError.textContent = "";
-  resetError.textContent = "";
 }
 
 function setView(view) {
   clearErrors();
-  tabsWrapper.hidden = view !== "login" && view !== "signup";
   tabLogin.setAttribute("aria-selected", String(view === "login"));
   tabSignup.setAttribute("aria-selected", String(view === "signup"));
 
   ALL_FORMS.forEach((form) => (form.hidden = true));
-  const shown = { login: loginForm, signup: signupForm, forgot: forgotForm, reset: resetForm }[view];
+  const shown = { login: loginForm, signup: signupForm }[view];
   shown.hidden = false;
 
   if (view === "signup") updatePasswordChecklist(signupPasswordInput, passwordChecklist);
-  if (view === "reset") updatePasswordChecklist(resetPasswordInput, resetPasswordChecklist);
 
   shown.querySelector("input").focus();
 }
@@ -162,8 +145,6 @@ closeBtn.addEventListener("click", closeDialog);
 dialog.addEventListener("cancel", () => setView("login")); // Esc key resets the dialog for next open
 tabLogin.addEventListener("click", () => setView("login"));
 tabSignup.addEventListener("click", () => setView("signup"));
-forgotPasswordLink.addEventListener("click", () => setView("forgot"));
-forgotBackBtn.addEventListener("click", () => setView("login"));
 
 loginForm.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -267,66 +248,6 @@ signupForm.addEventListener("submit", async (event) => {
   }
 });
 
-forgotForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  forgotError.textContent = "";
-
-  const email = forgotForm.elements["email"].value.trim();
-
-  if (!email || !isValidEmail(email)) {
-    forgotError.textContent = "Enter a valid email address.";
-    forgotForm.elements["email"].focus();
-    return;
-  }
-
-  setBusy(forgotForm, true);
-
-  // Link back to this page; Supabase parses the recovery token from the
-  // URL and fires PASSWORD_RECOVERY (handled below), opening "reset". This
-  // URL must be in Supabase's Authentication > URL Configuration allow-list.
-  const redirectTo = window.location.origin + window.location.pathname;
-  const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo });
-
-  setBusy(forgotForm, false);
-  if (error) {
-    forgotError.textContent = error.message;
-    return;
-  }
-  forgotForm.reset();
-  closeDialog();
-  showToast("If that email has an account, a reset link is on its way.");
-});
-
-resetForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  resetError.textContent = "";
-
-  const password = resetForm.elements["password"].value;
-
-  if (!passwordMeetsPolicy(password)) {
-    resetError.textContent = "Please meet all the password requirements above before continuing.";
-    resetPasswordInput.focus();
-    return;
-  }
-
-  setBusy(resetForm, true);
-  const { error } = await supabase.auth.updateUser({ password });
-  setBusy(resetForm, false);
-
-  if (error) {
-    if (error.name === "AuthWeakPasswordError" && error.reasons) {
-      resetError.textContent = "Password rejected by the server: " + error.reasons.join(", ") + ".";
-    } else {
-      resetError.textContent = error.message;
-    }
-    return;
-  }
-  resetForm.reset();
-  updatePasswordChecklist(resetPasswordInput, resetPasswordChecklist);
-  closeDialog();
-  showToast("Password updated.");
-});
-
 supabase.auth.onAuthStateChange((event, session) => {
   currentUser = session ? session.user : null;
   refreshPilotProfile(currentUser);
@@ -334,11 +255,6 @@ supabase.auth.onAuthStateChange((event, session) => {
 
   if (event === "SIGNED_OUT") {
     showToast("Logged out.");
-  }
-  if (event === "PASSWORD_RECOVERY") {
-    // Arrived here via the reset-password email link — prompt for a new
-    // password regardless of whether the dialog was already open.
-    openDialog("reset");
   }
 });
 

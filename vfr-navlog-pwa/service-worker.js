@@ -5,7 +5,7 @@
   cache-versioning/update strategy are added as those stages introduce new assets.
 */
 
-const CACHE_NAME = "vfr-navlog-shell-v24";
+const CACHE_NAME = "vfr-navlog-shell-v26";
 
 const APP_SHELL_FILES = [
   "./",

@@ -625,13 +625,6 @@ Styles for the navigation page side panel.
   color: var(--c-accent-strong);
 }
 
-/* "Ready" badge for feature cards whose stage is actually built, replacing
-   the "Stage N" placeholder badge once a card is wired up to a real view. */
-.feature-card__stage--ready {
-  color: var(--c-go);
-  border-color: var(--c-go);
-}
-
 /*
 Styles for the save and load route panel.
 */

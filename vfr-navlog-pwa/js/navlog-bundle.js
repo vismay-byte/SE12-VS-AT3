@@ -4,7 +4,7 @@ import {
   solveLeg, validateTas, validateWindDir, validateWindSpeed, validateMagVar,
   loadRouteLegsWithGs, validateDepartureTime, eteMinutesForLeg, formatEte,
   addMinutesClock, formatClock,
-  loadAircraftList, reserveMinutesFor, fuelRequired, checkFuelSufficiency
+  loadAircraftList, fuelRequired, checkFuelSufficiency
 } from "./route-planner-bundle.js";
 import { supabase } from "./supabase-client.js";
 import { escapeHtml, applyFieldCheck, renderSelfTestList } from "./shared-utils.js";

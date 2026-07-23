@@ -45,20 +45,6 @@ calculate the wind correction angle, ground speed and estimated time enroute.
   margin-right: auto;
 }
 
-/*
-This styles the chevron icon used to show whether the wind preview panel is open or collapsed.
-*/
-.wind-preview__toggle-icon {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  transition: transform var(--dur-med) var(--ease-panel);
-}
-
-.wind-preview__toggle[aria-expanded="true"] .wind-preview__toggle-icon {
-  transform: rotate(180deg);
-}
-
 .wind-preview__body {
   background: var(--c-bg-raised);
   border: 1px solid var(--c-border);
