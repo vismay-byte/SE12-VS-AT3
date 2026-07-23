@@ -769,6 +769,7 @@ export async function saveFlightToLogbook(data, flownOnDate) {
 // The callouts panel uses the most recent NAVLOG result and speaks each event when enabled.
 
 // Builds the timed callout events for one simulated flight.
+// Takes computed NAVLOG with 2 regular checks (fuel and DI) which produces a time-ordered list of events. It calls out at simulated minutes-since-departure
 export function computeCalloutSchedule(p) {
   const events = [];
 
