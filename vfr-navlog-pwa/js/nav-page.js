@@ -168,6 +168,7 @@ import { toRad, distanceNm, bearingTrue, escapeHtml } from "./shared-utils.js";
 
   // The map render order keeps the airspace layers behind the clickable markers.
 
+  // The components are drawn in back-to-front so aesthetically, there is appropriate layering present
   function renderMap() {
     const bounds = computeBounds();
     const project = makeProjector(bounds);
@@ -347,6 +348,7 @@ import { toRad, distanceNm, bearingTrue, escapeHtml } from "./shared-utils.js";
       "</dd>";
   }
 
+  // Reuses distanceNm and bearinTrue functions established in the functions above due to the same math required 
   function renderNearby() {
     const a = aerodromes.find((x) => x.icao === selectedIcao);
     if (!a) {
@@ -360,6 +362,8 @@ import { toRad, distanceNm, bearingTrue, escapeHtml } from "./shared-utils.js";
         nm: distanceNm(a.position, x.position),
         brg: bearingTrue(a.position, x.position)
       }))
+
+      // These are sorted by distances and only the top 6 are shown
       .sort((p, q) => p.nm - q.nm)
       .slice(0, 6);
 
@@ -438,6 +442,8 @@ import { toRad, distanceNm, bearingTrue, escapeHtml } from "./shared-utils.js";
       .join("");
   }
 
+  // This re-runs the renderMap function along with the side panel renderers
+  // This is effective at a small scale like this
   function selectAerodrome(icao) {
     if (!aerodromes.some((a) => a.icao === icao)) {
       return;
