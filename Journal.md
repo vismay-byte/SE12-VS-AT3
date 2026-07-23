@@ -103,7 +103,9 @@ ___
 Complete the social and ethical issues section of the Research and Planning document and continue background research on the topic as a whole. This section needs to be settled early since it directly feeds into later decisions, for example the security section needs to already know that XSS and phishing were flagged as ethical risks up front.
 
 ### Progress
-Completed the social and ethical issues section (see the Social and Ethical Issues heading in Research_and_Planning.md as evidence). On the ethical side, I focused on properly citing any code or inspiration I use, avoiding manipulative UI patterns, and making sure the app is designed to be secure enough against XSS and phishing given it will eventually store real, if only training, pilot data. On the social side, I wrote about the fact that not every major browser behaves identically so compatibility needs testing, and that not every aerodrome can realistically be covered given my time and hardware constraints, only the Sydney Basin. I also made further progress on general research, including starting to look at how different flight schools structure their own paper-based navigation logs.
+Completed the social and ethical issues section. On the ethical side, I focused on properly citing any code or inspiration I use, avoiding manipulative UI patterns, and making sure the app is designed to be secure enough against XSS and phishing given it will eventually store real, if only training, pilot data. On the social side, I wrote about the fact that not every major browser behaves identically so compatibility needs testing, and that not every aerodrome can realistically be covered given my time and hardware constraints, only the Sydney Basin. I also made further progress on general research, including starting to look at how different flight schools structure their own paper-based navigation logs.
+
+![Progress Image - Social and Ethical Issues](/Documentation/02.Researching_and_Planning/SE12-VS-Social_Ethical_Issues_ProgImg.png)
 
 ### Challenges and Solutions
 As with earlier weeks, there was a lot of information to process, and filtering out what was actually relevant to this specific project was difficult. I addressed this by focusing my reading specifically on materials aimed at student pilots rather than general aviation content (Online Resources), and by staying in contact with my client throughout (Collaboration) to check my understanding against a real student's experience.
@@ -143,6 +145,8 @@ Draft the data dictionary that lists every variable the app will use, covering r
 ### Progress
 Completed the data dictionary, which ended up with over fifty variables once I actually listed out route, leg, wind-triangle, fuel, aerodrome, and weather fields individually rather than thinking about them in vague groups. The new concept I picked up this week was how much clearer calculation logic becomes once every input and output has a properly defined name, type, and format ahead of time, instead of naming things as I go while coding.
 
+![Progress Image - Data Dictionary](/Documentation/02.Researching_and_Planning/SE12-VS-Data_Dictionary_ProgImg.png)
+
 ### Challenges and Solutions
 The data dictionary was more time-consuming than expected because a lot of the aviation variables (true course versus heading versus bearing, groundspeed versus true airspeed) needed to be precisely defined so I would not confuse them later when coding. I went back to my earlier research notes on the wind triangle and cross-checked definitions against a couple of flight-training sites (Online Resources) to get the wording exactly right.
 
@@ -170,6 +174,8 @@ Learned that a diagram trying to explain everything ends up explaining nothing c
 
 ### Aim for Next Week
 Start the Quality Assurance Checklist, beginning with Functionality.md, listing out concrete, checkable requirements rather than vague goals.
+
+![Progress Image - Level 1 DFD](/Documentation/02.Researching_and_Planning/QA_Checklist.md/SE12-VS_LVL1_DFD.png)
 
 ___
 
