@@ -310,7 +310,7 @@ END
 
     See: [Security_Snippet_4_Auth_And_Passwords.js](Security_Snippet_4_Auth_And_Passwords.js)
 
-5. **HTTPS.** As this project is currently run locally/from GitHub Pages rather than a custom server, HTTPS enforcement is provided automatically by GitHub Pages and by Supabase (all `supabase-js` calls are made over `https://*.supabase.co`); there is no plain-HTTP endpoint anywhere in the app for a "force HTTPS" setting to apply to.
+5. **HTTPS.** As this project is currently run locally/from GitHub Pages rather than a custom server, HTTPS enforcement is provided automatically by GitHub Pages and by Supabase (all `supabase-js` calls are made over `https://*.supabase.co`); there is no plain-HTTP endpoint anywhere in the app for a "force HTTPS" setting to apply to. The website is properly launched now via git hub pages securely using HTTPS. See link here: [SE12 AT3 VFR PWA VS](https://vismay-byte.github.io/SE12-VS-AT3/)
 
 ---
 
