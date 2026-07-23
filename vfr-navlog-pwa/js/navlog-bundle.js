@@ -904,8 +904,10 @@ function runCalloutsSelfTests() {
   let lastTickAt = null; // performance.now() timestamp of the previous tick
   let runState = "stopped"; // "stopped" | "running" | "paused"
 
+
   function speak(text) {
-    if (!enabledInput.checked || !speechAvailable) {
+    //checked at every startup since not every browser ships it
+    if (!enabledInput.checked || !speechAvailable) { 
       return;
     }
     const utterance = new SpeechSynthesisUtterance(text);
@@ -914,7 +916,7 @@ function runCalloutsSelfTests() {
     if (isNaN(utterance.volume)) {
       utterance.volume = 1;
     }
-    window.speechSynthesis.speak(utterance);
+    window.speechSynthesis.speak(utterance); // browser-native AP. By handing it a string, the OS reads it aloud
   }
 
   function logCallout(event) {
@@ -940,6 +942,7 @@ function runCalloutsSelfTests() {
     stopBtn.disabled = runState === "stopped";
   }
 
+  // walks the sorted schedule from wherever it left off and removes it from the list after calling it out
   function fireDueEvents() {
     while (nextEventIndex < schedule.length && schedule[nextEventIndex].atMinute <= simElapsedMin) {
       const event = schedule[nextEventIndex];
@@ -950,10 +953,10 @@ function runCalloutsSelfTests() {
   }
 
   function tick() {
-    const now = performance.now();
-    const deltaMs = now - lastTickAt;
+    const now = performance.now(); // This calculates the elapsed time between ticks to form a monotonic clock
+    const deltaMs = now - lastTickAt; // How long since the last tick
     lastTickAt = now;
-    const speedMultiplier = parseFloat(speedSelect.value) || 1;
+    const speedMultiplier = parseFloat(speedSelect.value) || 1; // for testing purposes and such, there are different speeds at which this can be run
     simElapsedMin += (deltaMs / 60000) * speedMultiplier;
     if (simElapsedMin > totalMinutesForRun) {
       simElapsedMin = totalMinutesForRun;
@@ -978,7 +981,7 @@ function runCalloutsSelfTests() {
       // Resume: keep the existing schedule/progress, just restart the clock.
       runState = "running";
       lastTickAt = performance.now();
-      tickTimerId = setInterval(tick, 250);
+      tickTimerId = setInterval(tick, 250); // By doing this, the browser can delay the picks in case it is busy or to save battery. This minimises the calls
       updateStatus();
       updateButtons();
       return;
@@ -1008,6 +1011,7 @@ function runCalloutsSelfTests() {
     updateButtons();
   }
 
+  // restarts interval from where it left off
   function pauseSimulation() {
     if (runState !== "running") {
       return;
