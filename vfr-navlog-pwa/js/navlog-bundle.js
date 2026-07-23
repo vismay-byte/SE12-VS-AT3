@@ -47,7 +47,7 @@ let jsPdfLoadPromise = null;
 // so a second click while it's still loading doesn't inject it twice.
 export function loadJsPdfConstructor() {
   if (typeof window === "undefined") {
-    return Promise.reject(new Error("No window — jsPDF needs a browser."));
+    return Promise.reject(new Error("No window. jsPDF needs a browser."));
   }
   if (window.jspdf && window.jspdf.jsPDF) {
     return Promise.resolve(window.jspdf.jsPDF);
@@ -116,7 +116,7 @@ export function buildNavlogPdfDoc(jsPDF, data) {
     [
       "Route: " + depLabel + " → " + arrLabel,
       "Aircraft: " + data.aircraft.name + " (" + data.aircraft.cruiseBurnLph + " L/h, " + data.aircraft.usableFuelL + " L usable)",
-      "Departure: " + formatClock(data.departureClock) + " — Conditions: " + (data.condition === "night" ? "Night / marginal" : "Day VFR"),
+      "Departure: " + formatClock(data.departureClock) + " . Conditions: " + (data.condition === "night" ? "Night / marginal" : "Day VFR"),
       "TAS " + data.tasKt + " kt, wind " + data.windDirDeg + "°/" + data.windSpeedKt + " kt, magnetic variation " + data.magVarDeg + "°"
     ],
     40,
@@ -171,7 +171,7 @@ export function buildNavlogPdfDoc(jsPDF, data) {
   doc.setFontSize(10);
   doc.text(
     "Total: " + data.totalDistanceNm.toFixed(1) + " NM, " + formatEte(data.totalMinutes) +
-    " — Fuel required " + data.fuel.totalFuelL.toFixed(1) + " L (" +
+    ". Fuel required " + data.fuel.totalFuelL.toFixed(1) + " L (" +
     (data.sufficiency.state === "ok" ? "within" : "EXCEEDS") + " " + data.aircraft.usableFuelL + " L usable)",
     40,
     y
@@ -181,8 +181,7 @@ export function buildNavlogPdfDoc(jsPDF, data) {
   doc.setFont("helvetica", "italic");
   doc.setFontSize(8);
   doc.text(
-    "Training/demonstration navigation log only — not for real flight planning. Cross-check against current" +
-    " ERSA/AIP/NOTAMs, certified aviation weather and the aircraft's actual POH before any real flight.",
+    "Cross-check against current ERSA/AIP/NOTAMs, certified aviation weather and the aircraft's actual POH before any real flight.",
     40,
     y,
     { maxWidth: 515 }
@@ -319,7 +318,7 @@ if (typeof window !== "undefined") {
   window.addEventListener("online", () => {
     flushPendingFlightSaves().then(({ savedCount }) => {
       if (savedCount > 0 && window.showToast) {
-        window.showToast("Back online — " + savedCount + " queued flight" + (savedCount === 1 ? "" : "s") + " saved to your logbook.");
+        window.showToast("Back online. " + savedCount + " queued flight" + (savedCount === 1 ? "" : "s") + " saved to your logbook.");
       }
     });
   });
@@ -469,7 +468,7 @@ export async function saveFlightToLogbook(data, flownOnDate) {
     }
 
     if (!route) {
-      return { valid: false, reason: "No route found yet — build a route on the Route Planner page first." };
+      return { valid: false, reason: "No route found yet. Build a route on the Route Planner page first." };
     }
 
     const condition = conditionSelect.value === "night" ? "night" : "day";
@@ -667,7 +666,7 @@ export async function saveFlightToLogbook(data, flownOnDate) {
       jsPDF = await loadJsPdfConstructor();
     } catch (err) {
       console.warn("NAVLOG PDF export: couldn't load jsPDF.", err);
-      pdfNote.textContent = "Couldn’t load the PDF library — check your internet connection and try again.";
+      pdfNote.textContent = "Couldn’t load the PDF library. Check your internet connection and try again.";
       pdfBtn.disabled = false;
       return;
     }
@@ -727,7 +726,7 @@ export async function saveFlightToLogbook(data, flownOnDate) {
     if (result.status === "saved") {
       saveLogbookNote.textContent = "Saved to your logbook.";
     } else if (result.status === "queued") {
-      saveLogbookNote.textContent = "You're offline — this flight is queued and will save automatically once you're back online.";
+      saveLogbookNote.textContent = "You're offline. This flight is queued and will save automatically once you're back online.";
     } else if (result.status === "not-logged-in") {
       saveLogbookNote.textContent = "Log in to save this flight to your logbook.";
       if (window.showToast) {

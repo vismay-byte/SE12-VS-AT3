@@ -239,7 +239,7 @@ export function runSelfTests(tolerance = 0.01) {
   async function fetchWeather() {
     const { dep } = await loadRouteLegsWithGs(null);
     if (!dep || !dep.position) {
-      fetchNote.textContent = "No route/departure aerodrome found yet — build a route on the Route Planner page first.";
+      fetchNote.textContent = "No route/departure aerodrome found yet. Build a route on the Route Planner page first.";
       return;
     }
     fetchBtn.disabled = true;
@@ -272,12 +272,12 @@ export function runSelfTests(tolerance = 0.01) {
       }
       fetchNote.textContent =
         "Fetched indicative weather for " + dep.icao + " at " + (current.time || "now") +
-        ". Not certified aviation weather — edit any field by hand if you have a better source.";
+        ". Not certified aviation weather. Edit any field by hand if you have a better source.";
       renderAll();
     } catch (err) {
       console.warn("Go/No-Go: couldn't fetch Open-Meteo weather.", err);
       fetchNote.textContent =
-        "Couldn't fetch indicative weather (needs an internet connection) — enter current conditions manually below instead.";
+        "Couldn't fetch indicative weather (needs an internet connection). Enter current conditions manually below instead.";
     } finally {
       fetchBtn.disabled = false;
     }
@@ -367,7 +367,7 @@ export function runSelfTests(tolerance = 0.01) {
     if (route) {
       html += '<span class="gonogo-verdict__crosswind">Worst-leg crosswind component: ' + crosswindKt.toFixed(0) + " kt</span>";
     } else {
-      html += '<span class="gonogo-verdict__crosswind">No route built yet — crosswind check skipped, wind speed/visibility/cloud checks still apply.</span>';
+      html += '<span class="gonogo-verdict__crosswind">No route built yet. Crosswind check skipped, wind speed/visibility/cloud checks still apply.</span>';
     }
     html += "</div>";
 

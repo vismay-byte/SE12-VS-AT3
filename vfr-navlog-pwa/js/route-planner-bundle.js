@@ -28,7 +28,7 @@ import {
   const CUSTOM_VALUE = "__custom__";
 
   if (!departureSelect || !tableBody) {
-    return; // Route Planner markup not present — defensive no-op.
+    return; // Route Planner markup not present.
   }
 
   let aerodromes = [];
@@ -113,7 +113,7 @@ import {
 
   const loadedDraft = loadDraft();
   route = loadedDraft || defaultRoute();
-  // Only auto-calculate legs for a brand-new route — recalculating a loaded
+  // Only auto-calculate legs for a brand-new route. recalculating a loaded
   // draft would silently overwrite the student's manual edits on reopen.
   const isNewRoute = !loadedDraft;
 
@@ -128,7 +128,7 @@ import {
     if (!a) {
       return null;
     }
-    return { name: a.icao + " — " + a.name, position: a.position };
+    return { name: a.icao + " - " + a.name, position: a.position };
   }
 
   function allPoints() {
@@ -153,7 +153,7 @@ import {
         legHolder.legDistanceNm = roundNm(distanceNm(from.position, to.position));
         legHolder.legTrueCourseDeg = roundDeg(bearingTrue(from.position, to.position));
       } else {
-        // At least one end is a custom point with no known coordinates —
+        // At least one end is a custom point with no known coordinates thus
         // can't suggest a value, leave whatever's already there (usually
         // null until the student types something in).
       }
@@ -164,7 +164,7 @@ import {
 
   function renderEndpointSelects() {
     const options = aerodromes
-      .map((a) => '<option value="' + escapeHtml(a.icao) + '">' + escapeHtml(a.icao) + " — " + escapeHtml(a.name) + "</option>")
+      .map((a) => '<option value="' + escapeHtml(a.icao) + '">' + escapeHtml(a.icao) + " - " + escapeHtml(a.name) + "</option>")
       .join("");
     departureSelect.innerHTML = options;
     arrivalSelect.innerHTML = options;
@@ -174,7 +174,7 @@ import {
     if (route.departureIcao === route.arrivalIcao) {
       endpointNote.hidden = false;
       endpointNote.textContent =
-        "Departure and arrival are the same aerodrome — fine for a local training route, otherwise double-check your selection.";
+        "Departure and arrival are the same aerodrome - fine for a local training route, otherwise double-check your selection.";
     } else {
       endpointNote.hidden = true;
     }
@@ -208,7 +208,7 @@ import {
   // The route table marks fields as missing, invalid, or complete so the student gets clear feedback.
 
   const DIST_MIN_NM = 0.1;
-  const DIST_MAX_NM = 500; // sanity bound — generous for a Sydney Basin training leg
+  const DIST_MAX_NM = 500; // sanity bound and generous for a Sydney Basin training leg
   const COURSE_MIN_DEG = 0;
   const COURSE_MAX_DEG = 359;
 
@@ -409,7 +409,7 @@ import {
       if (distInput && legHolder) {
         distInput.addEventListener("input", () => {
           const raw = distInput.value.trim();
-          // parseFloat("") is NaN, not "not yet typed" — keep that case as
+          // parseFloat("") is NaN, not "not yet typed". keep that case as
           // null (missing) so validateDistance doesn't merge it with "invalid".
           legHolder.legDistanceNm = raw === "" ? null : parseFloat(raw);
           distInput.classList.remove("route-row__input--auto");
@@ -460,7 +460,7 @@ import {
     renderTable();
     saveDraft();
     if (window.showToast) {
-      window.showToast("Route updated — distances/courses recalculated.");
+      window.showToast("Route updated. Distances/courses recalculated.");
     }
   }
 
@@ -499,7 +499,7 @@ import {
       if (trimmedName.length > CUSTOM_NAME_MAX_LEN) {
         if (window.showToast) {
           window.showToast(
-            "That name is too long (" + trimmedName.length + " characters) — keep it to " +
+            "That name is too long (" + trimmedName.length + " characters) - keep it to " +
             CUSTOM_NAME_MAX_LEN + " or fewer and try again."
           );
         }
@@ -659,7 +659,7 @@ export function solveLeg(p) {
   const A = toRad(p.windDirDeg - p.trueCourseDeg);
   const ratio = (p.windSpeedKt * Math.sin(A)) / tasKt;
   // Ratio outside [-1, 1] means wind exceeds TAS on the crosswind component
-  // (leg unflyable) — clamp so asin() returns a number, not NaN.
+  // (leg unflyable) - clamp so asin() returns a number, not NaN.
   const clamped = Math.max(-1, Math.min(1, ratio));
   const wcaRad = Math.asin(clamped);
   const wcaDeg = toDeg(wcaRad);
@@ -682,17 +682,17 @@ export function solveLeg(p) {
 
 const WIND_SELF_TEST_CASES = [
   {
-    label: "No wind — heading should equal course, GS should equal TAS",
+    label: "No wind - heading should equal course, GS should equal TAS",
     input: { trueCourseDeg: 90, distanceNm: 30, tasKt: 100, windDirDeg: 90, windSpeedKt: 0, magVarDeg: 0 },
     expected: { wcaDeg: 0, trueHeadingDeg: 90, groundSpeedKt: 100, magHeadingDeg: 90 }
   },
   {
-    label: "Direct headwind (wind FROM straight ahead) — GS = TAS − wind",
+    label: "Direct headwind (wind FROM straight ahead) - GS = TAS - wind",
     input: { trueCourseDeg: 360, distanceNm: 30, tasKt: 100, windDirDeg: 360, windSpeedKt: 20, magVarDeg: 0 },
     expected: { wcaDeg: 0, trueHeadingDeg: 0, groundSpeedKt: 80, magHeadingDeg: 0 }
   },
   {
-    label: "Direct tailwind (wind FROM straight behind) — GS = TAS + wind",
+    label: "Direct tailwind (wind FROM straight behind) - GS = TAS + wind",
     input: { trueCourseDeg: 180, distanceNm: 30, tasKt: 100, windDirDeg: 0, windSpeedKt: 20, magVarDeg: 0 },
     expected: { wcaDeg: 0, trueHeadingDeg: 180, groundSpeedKt: 120, magHeadingDeg: 180 }
   },
@@ -707,7 +707,7 @@ const WIND_SELF_TEST_CASES = [
     expected: { wcaDeg: -30, trueHeadingDeg: 330, groundSpeedKt: 86.60254, magHeadingDeg: 330 }
   },
   {
-    label: "Magnetic variation applied — 13°E means MH = TH − 13 (Bankstown's magVarDeg)",
+    label: "Magnetic variation applied - 13°E means MH = TH - 13 (Bankstown's magVarDeg)",
     input: { trueCourseDeg: 90, distanceNm: 30, tasKt: 100, windDirDeg: 90, windSpeedKt: 0, magVarDeg: 13 },
     expected: { wcaDeg: 0, trueHeadingDeg: 90, groundSpeedKt: 100, magHeadingDeg: 77 }
   }
@@ -802,7 +802,7 @@ function runWindTriangleSelfTests(tolerance = 0.01) {
     const dep = aerodromesById.get(route.departureIcao);
     const arr = aerodromesById.get(route.arrivalIcao);
     const points = [
-      { name: dep ? dep.icao + " — " + dep.name : route.departureIcao, isEndpoint: true },
+      { name: dep ? dep.icao + " - " + dep.name : route.departureIcao, isEndpoint: true },
       ...route.waypoints.map((w) => ({
         name: w.name,
         legDistanceNm: w.legDistanceNm,
@@ -810,7 +810,7 @@ function runWindTriangleSelfTests(tolerance = 0.01) {
         isEndpoint: false
       })),
       {
-        name: arr ? arr.icao + " — " + arr.name : route.arrivalIcao,
+        name: arr ? arr.icao + " - " + arr.name : route.arrivalIcao,
         legDistanceNm: route.arrivalLeg ? route.arrivalLeg.legDistanceNm : null,
         legTrueCourseDeg: route.arrivalLeg ? route.arrivalLeg.legTrueCourseDeg : null,
         isEndpoint: true,
@@ -830,7 +830,7 @@ function runWindTriangleSelfTests(tolerance = 0.01) {
   }
 
   // Fetches indicative current wind from Open-Meteo (free, no key) for the
-  // route's departure aerodrome — same API/pattern as gonogo.js's own
+  // route's departure aerodrome - same API/pattern as gonogo.js's own
   // fetchWeather(), requesting wind speed directly in knots so no unit
   // conversion is needed here (BUG-01: this panel previously had no live-
   // weather option at all, unlike Go/No-Go).
@@ -839,7 +839,7 @@ function runWindTriangleSelfTests(tolerance = 0.01) {
     const route = loadRouteDraft();
     const dep = route ? aerodromesById.get(route.departureIcao) : null;
     if (!dep || !dep.position) {
-      fetchNote.textContent = "No route/departure aerodrome found yet — build a route above first.";
+      fetchNote.textContent = "No route/departure aerodrome found yet. Build a route above first.";
       return;
     }
     fetchBtn.disabled = true;
@@ -864,12 +864,12 @@ function runWindTriangleSelfTests(tolerance = 0.01) {
       }
       fetchNote.textContent =
         "Fetched indicative wind for " + dep.icao + " at " + (current.time || "now") +
-        ". Not certified aviation weather — edit either field by hand if you have a better source.";
+        ". Not certified aviation weather. Edit either field by hand if you have a better source.";
       renderPreview();
     } catch (err) {
       console.warn("Wind preview: couldn't fetch Open-Meteo weather.", err);
       fetchNote.textContent =
-        "Couldn't fetch indicative weather (needs an internet connection) — enter wind manually instead.";
+        "Couldn't fetch indicative weather (needs an internet connection).";
     } finally {
       fetchBtn.disabled = false;
     }
@@ -891,7 +891,7 @@ function runWindTriangleSelfTests(tolerance = 0.01) {
         if (magVarSourceNote) {
           magVarSourceNote.textContent =
             "Pre-filled from " + dep.icao + "'s magVarDeg (" + dep.magVarDeg +
-            "°E) — edit if a leg's actual variation differs. The whole " +
+            "°E). Edit if a leg's actual variation differs. The whole " +
             "route uses one figure for now; Sydney Basin variation doesn't change " +
             "enough over these distances to need a per-leg value.";
         }
@@ -901,7 +901,7 @@ function runWindTriangleSelfTests(tolerance = 0.01) {
     if (!route || route.waypoints === undefined) {
       resultsBody.innerHTML = "";
       emptyNote.hidden = false;
-      emptyNote.textContent = "No route found yet — build a route above first, then come back to this panel.";
+      emptyNote.textContent = "No route found yet. Build a route above first, then come back to this panel.";
       return;
     }
 
@@ -951,7 +951,7 @@ function runWindTriangleSelfTests(tolerance = 0.01) {
           '<tr class="wind-preview-row wind-preview-row--incomplete">' +
           '<td class="wind-preview-row__index">' + (i + 1) + "</td>" +
           "<td>" + escapeHtml(leg.fromName) + " → " + escapeHtml(leg.toName) + "</td>" +
-          '<td colspan="5">Leg is missing a distance/true course — fill it in above on the route table first.</td>' +
+          '<td colspan="5">Leg is missing a distance/true course. Fill it in above on the route table first.</td>' +
           "</tr>";
         return;
       }
@@ -1027,7 +1027,7 @@ export function eteMinutesForLeg(distanceNm, groundSpeedKt) {
 // Formats a minutes value as a human-readable ETE string.
 export function formatEte(minutes) {
   if (minutes === null || minutes === undefined || !isFinite(minutes)) {
-    return "—"; // em dash — "not available", not zero
+    return "-"; // em dash - "not available", not zero
   }
   const totalWholeMin = Math.round(minutes);
   const hrs = Math.floor(totalWholeMin / 60);
@@ -1091,14 +1091,14 @@ export async function loadRouteLegsWithGs(windParams) {
   const dep = aerodromesById.get(route.departureIcao);
   const arr = aerodromesById.get(route.arrivalIcao);
   const points = [
-    { name: dep ? dep.icao + " — " + dep.name : route.departureIcao },
+    { name: dep ? dep.icao + " - " + dep.name : route.departureIcao },
     ...route.waypoints.map((w) => ({
       name: w.name,
       legDistanceNm: w.legDistanceNm,
       legTrueCourseDeg: w.legTrueCourseDeg
     })),
     {
-      name: arr ? arr.icao + " — " + arr.name : route.arrivalIcao,
+      name: arr ? arr.icao + " - " + arr.name : route.arrivalIcao,
       legDistanceNm: route.arrivalLeg ? route.arrivalLeg.legDistanceNm : null,
       legTrueCourseDeg: route.arrivalLeg ? route.arrivalLeg.legTrueCourseDeg : null
     }
@@ -1272,7 +1272,7 @@ function runTimeEteSelfTests(tolerance = 0.01) {
       totalNote.textContent = "";
       emptyNote.hidden = false;
       emptyNote.textContent =
-        "Enter a true airspeed in the “Wind and heading preview” panel above first — groundspeed comes from there.";
+        "Enter a true airspeed in the “Wind and heading preview” panel above first. Groundspeed comes from there.";
       return;
     }
 
@@ -1287,7 +1287,7 @@ function runTimeEteSelfTests(tolerance = 0.01) {
       resultsBody.innerHTML = "";
       totalNote.textContent = "";
       emptyNote.hidden = false;
-      emptyNote.textContent = "No route found yet — build a route above first, then come back to this panel.";
+      emptyNote.textContent = "No route found yet. Build a route above first, then come back to this panel.";
       return;
     }
 
@@ -1308,7 +1308,7 @@ function runTimeEteSelfTests(tolerance = 0.01) {
           '<tr class="time-eta-row time-eta-row--incomplete">' +
           '<td class="time-eta-row__index">' + (i + 1) + "</td>" +
           "<td>" + escapeHtml(leg.fromName) + " → " + escapeHtml(leg.toName) + "</td>" +
-          '<td colspan="4">Leg is missing a distance/true course — fill it in on the route table above.</td>' +
+          '<td colspan="4">Leg is missing a distance/true course. Fill it in on the route table above.</td>' +
           "</tr>";
         return;
       }
@@ -1321,13 +1321,13 @@ function runTimeEteSelfTests(tolerance = 0.01) {
           '<td class="time-eta-row__index">' + (i + 1) + "</td>" +
           "<td>" + escapeHtml(leg.fromName) + " → " + escapeHtml(leg.toName) + "</td>" +
           "<td>" + leg.distanceNm.toFixed(1) + " NM</td>" +
-          '<td colspan="3"><span class="chip chip--nogo">Wind exceeds TAS — ETE unavailable</span></td>' +
+          '<td colspan="3"><span class="chip chip--nogo">Wind exceeds TAS. ETE unavailable</span></td>' +
           "</tr>";
         return;
       }
 
       totalMinutes += ete;
-      let etaCell = "—";
+      let etaCell = "-";
       if (hasDeparture) {
         cumulativeMinutes += ete;
         clock = addMinutesClock(departureCheck.value.h, departureCheck.value.m, cumulativeMinutes);
@@ -1542,7 +1542,7 @@ export async function loadAircraftList() {
     if (tasInput.value.trim() === "" || isNaN(tasVal) || tasVal <= 0) {
       emptyNote.hidden = false;
       emptyNote.textContent =
-        "Enter a true airspeed in the “Wind and heading preview” panel above first — this figure comes from there. " +
+        "Enter a true airspeed in the “Wind and heading preview” panel above first. This figure comes from there. " +
         aircraft.name + "'s typical cruise TAS is about " + aircraft.typicalCruiseTasKt + " kt.";
       resultEl.innerHTML = "";
       return;
@@ -1561,7 +1561,7 @@ export async function loadAircraftList() {
 
     if (!route) {
       emptyNote.hidden = false;
-      emptyNote.textContent = "No route found yet — build a route above first, then come back to this panel.";
+      emptyNote.textContent = "No route found yet. Build a route above first, then come back to this panel.";
       resultEl.innerHTML = "";
       return;
     }
@@ -1609,7 +1609,7 @@ export async function loadAircraftList() {
       (sufficiency.state === "ok"
         ? '<span class="chip chip--go">Within usable fuel</span> ' + sufficiency.spareL.toFixed(1) + " L to spare."
         : '<span class="chip chip--nogo">Exceeds usable fuel</span> by ' + Math.abs(sufficiency.spareL).toFixed(1) +
-          " L — shorten the route, refuel en route, or pick a different aircraft.") +
+          " L. Shorten the route, refuel en route, or pick a different aircraft.") +
       "</p>" +
       warningsHtml;
   }
@@ -1794,7 +1794,7 @@ function runSaveLoadSelfTests() {
       return;
     }
     const existing = loadSavedRoutes();
-    if (existing[name] && !window.confirm('A saved route named "' + name + '" already exists — overwrite it?')) {
+    if (existing[name] && !window.confirm('A saved route named "' + name + '" already exists. Overwrite it?')) {
       saveNote.textContent = "";
       return;
     }
@@ -1823,7 +1823,7 @@ function runSaveLoadSelfTests() {
     } catch (err) {
       console.warn("Save/Load: couldn't write the loaded route into the working draft.", err);
       if (window.showToast) {
-        window.showToast("Couldn't load that route — see the console for details.");
+        window.showToast("Couldn't load that route - see the console for details.");
       }
       return;
     }

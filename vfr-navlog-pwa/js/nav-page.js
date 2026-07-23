@@ -27,7 +27,7 @@ import { toRad, distanceNm, bearingTrue, escapeHtml } from "./shared-utils.js";
     "primary-training": "Primary training aerodrome",
     "regional-destination": "Regional destination",
     "training-area": "Training/hazard area",
-    "avoid": "Avoid — controlled airspace"
+    "avoid": "Avoid. This is a controlled airspace"
   };
 
   // Shape and colour per role where the dark theme reuses the same hex for

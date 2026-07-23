@@ -2,10 +2,10 @@
   "_meta": {
     "purpose": "Static, hand-compiled Sydney Basin aerodrome reference dataset for the VFR NAVLOG Trainer (HSC Software Engineering sample PWA).",
     "disclaimer": "Training/demonstration data only. NOT for real navigation or flight planning. Frequencies, boundaries, circuit details and restrictions are simplified from public reference sources and may be out of date or inaccurate. Always check the current ERSA, AIP and NOTAMs before any real flight.",
-    "compiledFrom": "Public, non-restricted aviation reference sources (ERSA-derived aerodrome charts, SkyVector, OpenAIP, CASA \"Stay OnTrack\" guidance) — no live or licensed CASA/Airservices data feed is used anywhere in this app.",
+    "compiledFrom": "Public, non-restricted aviation reference sources (ERSA-derived aerodrome charts, SkyVector, OpenAIP, CASA \"Stay OnTrack\" guidance). No live or licensed CASA/Airservices data feed is used anywhere in this app.",
     "lastCompiled": "2026-07-16",
     "coordinateFormat": "Decimal degrees, WGS84 approximation. [lat, lon] pairs.",
-    "boundaryNote": "controlZone.boundary polygons are simplified circular approximations for on-screen reference only (see Stage 4 Nav Page) — they are NOT the true, often stepped/irregular, charted airspace boundary."
+    "boundaryNote": "controlZone.boundary polygons are simplified circular approximations for on-screen reference only they are NOT the true, often stepped/irregular, charted airspace boundary."
   },
 
   "aerodromes": [
@@ -32,15 +32,15 @@
       "circuit": {
         "direction": "Left-hand (standard)",
         "altitudeFt": 1000,
-        "notes": "Runway 11R/29L is the dedicated circuit-training runway. Circuit joins and departures are tower-directed — this is controlled Class D airspace, not a CTAF field."
+        "notes": "Runway 11R/29L is the dedicated circuit-training runway. Circuit joins and departures are tower-directed. This is controlled Class D airspace, not a CTAF field."
       },
-      "restrictions": "Class D control zone, surface to 1500 ft — a clearance from Bankstown Tower is required at all times, it is not a CTAF/broadcast field. Sits directly under the Sydney Class C steps, so departures heading toward Sydney need a release from Sydney Approach before entering controlled airspace above the zone. Busy multi-runway circuit training environment — expect sequencing instructions.",
+      "restrictions": "Class D control zone, surface to 1500 ft. A clearance from Bankstown Tower is required at all times, it is not a CTAF/broadcast field. Sits directly under the Sydney Class C steps, so departures heading toward Sydney need a release from Sydney Approach before entering controlled airspace above the zone. Busy multi-runway circuit training environment. Expect sequencing instructions.",
       "controlZone": {
         "shape": "circle-approx",
         "radiusNm": 5,
         "boundary": [[-33.8411, 150.9883], [-33.8474, 151.0267], [-33.8655, 151.0593], [-33.8925, 151.0811], [-33.9244, 151.0887], [-33.9563, 151.0811], [-33.9833, 151.0593], [-34.0014, 151.0267], [-34.0077, 150.9883], [-34.0014, 150.9499], [-33.9833, 150.9173], [-33.9563, 150.8955], [-33.9244, 150.8879], [-33.8925, 150.8955], [-33.8655, 150.9173], [-33.8474, 150.9499]]
       },
-      "trainingNotes": "The busiest of the two Sydney Basin primary training aerodromes in this app — a good default home base for a student pilot's profile."
+      "trainingNotes": "The busiest of the two Sydney Basin primary training aerodromes in this app. A good default home base for a student pilot's profile."
     },
 
     {
@@ -64,15 +64,15 @@
       "circuit": {
         "direction": "Left-hand (standard, powered aircraft)",
         "altitudeFt": 1300,
-        "notes": "Circuit direction and active runway can change through the day for noise abatement — always confirm with Tower/ATIS, don't assume from a previous visit."
+        "notes": "Circuit direction and active runway can change through the day for noise abatement. Always confirm with Tower/ATIS, don't assume from a previous visit."
       },
-      "restrictions": "Class D control zone, surface to 1500 ft. Significant glider and tug operations run contra-circuit on the parallel glider strips alongside the powered-aircraft runways, with no \"dead side\" while contra-circuits are active — extra lookout discipline required. Training-restriction notes apply (see ERSA); this app does not model the specific restricted areas/times.",
+      "restrictions": "Class D control zone, surface to 1500 ft. Significant glider and tug operations run contra-circuit on the parallel glider strips alongside the powered-aircraft runways, with no \"dead side\" while contra-circuits are active. Extra lookout discipline required. Training-restriction notes apply (see ERSA); this app does not model the specific restricted areas/times.",
       "controlZone": {
         "shape": "circle-approx",
         "radiusNm": 4,
         "boundary": [[-33.9736, 150.687], [-33.9787, 150.7178], [-33.9932, 150.7439], [-34.0148, 150.7613], [-34.0403, 150.7675], [-34.0658, 150.7613], [-34.0874, 150.7439], [-34.1019, 150.7178], [-34.107, 150.687], [-34.1019, 150.6562], [-34.0874, 150.6301], [-34.0658, 150.6127], [-34.0403, 150.6065], [-34.0148, 150.6127], [-33.9932, 150.6301], [-33.9787, 150.6562]]
       },
-      "trainingNotes": "Second primary training aerodrome option in the app — good contrast case for the glider/contra-circuit restriction note."
+      "trainingNotes": "Second primary training aerodrome option in the app. Good contrast case for the glider/contra-circuit restriction note."
     },
 
     {
@@ -91,14 +91,14 @@
       ],
       "frequencies": {
         "approach": "123.6 / 132.8 (Sydney Approach, sector-dependent)",
-        "note": "Not a VFR training destination in this app — frequencies listed for reference/avoidance only."
+        "note": "Not a VFR training destination in this app. Frequencies listed for reference/avoidance only."
       },
       "circuit": {
         "direction": "n/a",
         "altitudeFt": null,
-        "notes": "Not used for VFR circuit training — major international/domestic controlled aerodrome."
+        "notes": "Not used for VFR circuit training. Major international/domestic controlled aerodrome."
       },
-      "restrictions": "Class C controlled airspace with a stepped \"wedding cake\" shelf structure over the Sydney Basin — a clearance is required to enter at any level. Student VFR training routes in this app are planned to stay clear of this airspace; it is included as a reference/avoidance shape only, not a destination.",
+      "restrictions": "Class C controlled airspace with a stepped \"wedding cake\" shelf structure over the Sydney Basin. A clearance is required to enter at any level. Student VFR training routes in this app are planned to stay clear of this airspace; it is included as a reference/avoidance shape only, not a destination.",
       "controlZone": {
         "shape": "circle-approx",
         "radiusNm": 20,
@@ -126,10 +126,10 @@
       "circuit": {
         "direction": "Standard (confirm on CTAF)",
         "altitudeFt": 1000,
-        "notes": "Non-towered — self-announce on CTAF, standard right-of-way and see-and-avoid rules apply."
+        "notes": "Non-towered. Self-announce on CTAF, standard right-of-way and see-and-avoid rules apply."
       },
-      "restrictions": "Class G, non-towered — CTAF broadcast procedures apply, no tower clearance available or required. Coastal field; a popular \"cross-country\" destination south of Bankstown/Camden for training routes.",
-      "trainingNotes": "Good first cross-country destination — coastal track, clear of the Sydney Class C shelf, simple CTAF procedures."
+      "restrictions": "Class G, non-towered. CTAF broadcast procedures apply, no tower clearance available or required. Coastal field; a popular \"cross-country\" destination south of Bankstown/Camden for training routes.",
+      "trainingNotes": "Good first cross-country destination. Coastal track, clear of the Sydney Class C shelf, simple CTAF procedures."
     },
 
     {
@@ -152,7 +152,7 @@
         "altitudeFt": 1000,
         "notes": "Broadcast turning base is required; straight-in approaches are not permitted."
       },
-      "restrictions": "Class G, non-towered — CTAF broadcast procedures apply. Curfew: no aircraft movements between 2200 and 0630 local. Wildlife hazard (kangaroos/birds) noted for this field. Central Coast destination, good northward cross-country option.",
+      "restrictions": "Class G, non-towered. CTAF broadcast procedures apply. Curfew: no aircraft movements between 2200 and 0630 local. Wildlife hazard (kangaroos/birds) noted for this field. Central Coast destination, good northward cross-country option.",
       "trainingNotes": "Useful for teaching curfew/noise-abatement restrictions and \"no straight-in approach\" procedures, which YWOL and the primary fields don't illustrate as clearly."
     },
 
@@ -169,14 +169,14 @@
         { "designator": "unsealed strip", "lengthM": 515, "surface": "unsealed" }
       ],
       "frequencies": {
-        "ctaf": "126.7 (shared area frequency — confirm current value in ERSA)"
+        "ctaf": "126.7 (shared area frequency. Confirm current value in ERSA)"
       },
       "circuit": {
         "direction": "Confirm on CTAF",
         "altitudeFt": null,
-        "notes": "Heavy gliding, parachuting and ultralight activity — treat as a high-lookout training area, not a routine transit point."
+        "notes": "Heavy gliding, parachuting and ultralight activity. Treat as a high-lookout training area, not a routine transit point."
       },
-      "restrictions": "Class G. Intensive gliding/parachute/sport-aviation site south-west of Sydney — routes and altitudes near Wedderburn should be planned with extra vertical/lateral buffer for glider and parachute traffic, per the CASA \"Stay OnTrack\" Sydney Basin guidance.",
+      "restrictions": "Class G. Intensive gliding/parachute/sport-aviation site south-west of Sydney. Routes and altitudes near Wedderburn should be planned with extra vertical/lateral buffer for glider and parachute traffic, per the CASA \"Stay OnTrack\" Sydney Basin guidance.",
       "trainingNotes": "Included as a \"plan around this, don't route straight through it\" hazard case for the Route Planner and Go/No-Go stages, alongside The Oaks."
     },
 
@@ -201,8 +201,8 @@
         "altitudeFt": 1900,
         "notes": "Avoid overflying the township of The Oaks. Surfaces become soft after heavy rain; tall trees near several thresholds."
       },
-      "restrictions": "Private, unlicensed airfield — Prior Permission Required (PPR) for all landings, not a casual diversion option. Busy recreational/training field (~200 movements/day) used as an emergency alternate to Bankstown/Camden. Mixed traffic: sport aircraft, gliders, helicopters and GA.",
-      "trainingNotes": "Deliberately included as a PPR/private-field contrast to the public ERSA-listed aerodromes — reinforces that \"nearby\" doesn't always mean \"available to divert to.\""
+      "restrictions": "Private, unlicensed airfield. Prior Permission Required (PPR) for all landings, not a casual diversion option. Busy recreational/training field (~200 movements/day) used as an emergency alternate to Bankstown/Camden. Mixed traffic: sport aircraft, gliders, helicopters and GA.",
+      "trainingNotes": "Deliberately included as a PPR/private-field contrast to the public ERSA-listed aerodromes. Reinforces that \"nearby\" doesn't always mean \"available to divert to.\""
     },
 
     {
@@ -224,9 +224,9 @@
       "circuit": {
         "direction": "Standard (confirm on CTAF)",
         "altitudeFt": 1000,
-        "notes": "Non-towered — self-announce on CTAF."
+        "notes": "Non-towered. Self-announce on CTAF."
       },
-      "restrictions": "Class G, non-towered. Highest and coolest field in this dataset (elevation 2141 ft) — a useful case for students to see density-altitude/performance considerations vary noticeably from the low-lying Sydney Basin fields.",
+      "restrictions": "Class G, non-towered. Highest and coolest field in this dataset (elevation 2141 ft). A useful case for students to see density-altitude/performance considerations vary noticeably from the low-lying Sydney Basin fields.",
       "trainingNotes": "Good longer cross-country destination southwest of the Sydney Basin; also useful for teaching that terrain elevation affects performance planning, not just distance and wind."
     }
   ]

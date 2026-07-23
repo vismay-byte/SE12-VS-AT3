@@ -174,7 +174,7 @@ loginForm.addEventListener("submit", async (event) => {
   // already exists, submitting new credentials must never silently swap
   // the signed-in account. Log out explicitly first.
   if (currentUser) {
-    loginError.textContent = "You're already logged in — log out first if you want to switch accounts.";
+    loginError.textContent = "You're already logged in. Log out first if you want to switch accounts.";
     return;
   }
 
@@ -259,7 +259,7 @@ signupForm.addEventListener("submit", async (event) => {
   if (data.session) {
     // Email confirmation is off — the account is immediately usable.
     closeDialog();
-    showToast("Account created — you're logged in.");
+    showToast("Account created. You're logged in.");
   } else {
     // Email confirmation is on — no session yet until the link is clicked.
     closeDialog();

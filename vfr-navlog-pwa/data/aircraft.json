@@ -5,7 +5,7 @@
     "compiledFrom": "Typical published POH cruise fuel-burn/usable-fuel figures and generic normal-procedure checklist flows for these common trainer types, rounded/simplified for a training exemplar — no live or licensed data feed is used anywhere in this app.",
     "lastCompiled": "2026-07-22",
     "fuelUnits": "Litres (L) and litres-per-hour (L/h) throughout, converted from the imperial-gallon POH figures most trainer POHs are published in.",
-    "checklistDisclaimer": "Generic normal-procedure checklists for training/demonstration only — always fly from the current, aircraft-specific POH/checklist, not this app."
+    "checklistDisclaimer": "Generic normal-procedure checklists for training/demonstration only. Always fly from the current, aircraft-specific POH/checklist, not this app."
   },
 
   "aircraft": [
@@ -26,7 +26,7 @@
             "Control surfaces free and correct",
             "Oil quantity checked",
             "Seats, belts and doors secure",
-            "Master switch ON — fuel gauges checked",
+            "Master switch ON, fuel gauges checked",
             "Mixture RICH, throttle cracked open"
           ]
         },
@@ -34,11 +34,11 @@
           "id": "pre-takeoff",
           "label": "Pre-takeoff",
           "items": [
-            "Flight controls — free and correct",
-            "Flight instruments — set (altimeter, DI aligned with compass)",
+            "Flight controls: free and correct",
+            "Flight instruments: set (altimeter, DI aligned with compass)",
             "Trim set for takeoff",
-            "Fuel selector — BOTH, fuel quantity sufficient",
-            "Engine run-up — magnetos and carb heat checked",
+            "Fuel selector: BOTH, fuel quantity sufficient",
+            "Engine run-up: magnetos and carb heat checked",
             "Radios and transponder set",
             "Hatches, harnesses secure",
             "Final area/circuit scan"
@@ -62,8 +62,8 @@
           "items": [
             "ATIS/weather obtained, altimeter set",
             "Seats, belts secure",
-            "Fuel selector — BOTH, mixture RICH",
-            "Carb heat — as required",
+            "Fuel selector: BOTH, mixture RICH",
+            "Carb heat: as required",
             "Landing checklist complete before circuit joining"
           ]
         },
@@ -73,7 +73,7 @@
           "items": [
             "Parking brake set",
             "Radios and electrical equipment OFF",
-            "Mixture — idle cut-off",
+            "Mixture: idle cut-off",
             "Magnetos OFF, master switch OFF",
             "Control lock fitted, chocks/tie-downs as required"
           ]
@@ -97,7 +97,7 @@
             "Control surfaces free and correct",
             "Oil quantity checked",
             "Seats, belts and doors secure",
-            "Master switch ON — fuel gauges and flaps checked",
+            "Master switch ON, fuel gauges and flaps checked",
             "Mixture RICH, throttle cracked open"
           ]
         },
@@ -105,11 +105,11 @@
           "id": "pre-takeoff",
           "label": "Pre-takeoff",
           "items": [
-            "Flight controls — free and correct",
-            "Flight instruments — set (altimeter, DI aligned with compass)",
+            "Flight controls: free and correct",
+            "Flight instruments: set (altimeter, DI aligned with compass)",
             "Trim set for takeoff",
-            "Fuel selector — BOTH, fuel quantity sufficient",
-            "Engine run-up — magnetos and carb heat checked",
+            "Fuel selector: BOTH, fuel quantity sufficient",
+            "Engine run-up: magnetos and carb heat checked",
             "Flaps set for takeoff",
             "Radios and transponder set",
             "Final area/circuit scan"
@@ -133,8 +133,8 @@
           "items": [
             "ATIS/weather obtained, altimeter set",
             "Seats, belts secure",
-            "Fuel selector — BOTH, mixture RICH",
-            "Carb heat — as required",
+            "Fuel selector: BOTH, mixture RICH",
+            "Carb heat: as required",
             "Flaps set progressively on approach",
             "Landing checklist complete before circuit joining"
           ]
@@ -145,7 +145,7 @@
           "items": [
             "Parking brake set",
             "Radios and electrical equipment OFF",
-            "Mixture — idle cut-off",
+            "Mixture: idle cut-off",
             "Magnetos OFF, master switch OFF",
             "Control lock fitted, chocks/tie-downs as required"
           ]
@@ -169,7 +169,7 @@
             "Control surfaces free and correct",
             "Oil quantity checked",
             "Seats, belts and doors secure",
-            "Master switch ON — fuel gauges checked",
+            "Master switch ON, fuel gauges checked",
             "Mixture RICH, throttle cracked open"
           ]
         },
@@ -177,11 +177,11 @@
           "id": "pre-takeoff",
           "label": "Pre-takeoff",
           "items": [
-            "Flight controls — free and correct",
-            "Flight instruments — set (altimeter, DI aligned with compass)",
+            "Flight controls: free and correct",
+            "Flight instruments: set (altimeter, DI aligned with compass)",
             "Trim set for takeoff",
-            "Fuel selector — select fullest tank, fuel pump ON",
-            "Engine run-up — magnetos and carb heat checked",
+            "Fuel selector: select fullest tank, fuel pump ON",
+            "Engine run-up: magnetos and carb heat checked",
             "Radios and transponder set",
             "Final area/circuit scan"
           ]
@@ -205,7 +205,7 @@
             "ATIS/weather obtained, altimeter set",
             "Seats, belts secure",
             "Fuel pump ON, fullest tank selected, mixture RICH",
-            "Carb heat — as required",
+            "Carb heat: as required",
             "Landing checklist complete before circuit joining"
           ]
         },
@@ -215,7 +215,7 @@
           "items": [
             "Parking brake set",
             "Radios and electrical equipment OFF",
-            "Mixture — idle cut-off",
+            "Mixture: idle cut-off",
             "Magnetos OFF, master switch OFF",
             "Control lock fitted, chocks/tie-downs as required"
           ]

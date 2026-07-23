@@ -115,7 +115,7 @@ export function runSelfTests() {
     } catch (err) {
       console.warn("Logbook: couldn't load jsPDF.", err);
       if (window.showToast) {
-        window.showToast("Couldn't load the PDF library — check your internet connection and try again.");
+        window.showToast("Couldn't load the PDF library. Check your internet connection and try again.");
       }
       return;
     }
@@ -172,16 +172,16 @@ export function runSelfTests() {
     if (error) {
       listEl.innerHTML = "";
       emptyNote.hidden = false;
-      emptyNote.textContent = "Couldn't load your logbook — check your internet connection and try again.";
-      totalHoursEl.textContent = "—";
-      flightCountEl.textContent = "—";
+      emptyNote.textContent = "Couldn't load your logbook. Check your internet connection and try again.";
+      totalHoursEl.textContent = "-";
+      flightCountEl.textContent = "-";
       return;
     }
 
     if (flights.length === 0) {
       listEl.innerHTML = "";
       emptyNote.hidden = false;
-      emptyNote.textContent = "No flights saved yet — generate a NAVLOG and use “Save to logbook” there.";
+      emptyNote.textContent = "No flights saved yet. Generate a NAVLOG and use “Save to logbook” there.";
       totalHoursEl.textContent = formatHoursDecimal(0);
       flightCountEl.textContent = "0";
       return;
@@ -221,7 +221,7 @@ export function runSelfTests() {
         window.showToast(
           savedCount > 0
             ? savedCount + " flight" + (savedCount === 1 ? "" : "s") + " saved. " + (remainingCount > 0 ? remainingCount + " still queued." : "")
-            : "Still couldn't save — check your internet connection."
+            : "Still couldn't save. Check your internet connection."
         );
       }
       updatePendingNote();

@@ -393,7 +393,7 @@ Styles for the navigation map and its markers.
   fill-opacity: 0.16;
 }
 
-/* Waypoint markers — small, quiet, chart-style flags */
+/* Waypoint markers. Small, quiet, chart-style flags */
 .nav-waypoint__dot {
   fill: var(--c-bg);
   stroke: var(--c-text-muted);

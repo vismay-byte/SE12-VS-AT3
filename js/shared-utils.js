@@ -50,8 +50,8 @@ export function roundDeg(deg) {
 
 // Escapes HTML-sensitive characters before injecting text into the DOM.
 export function escapeHtml(str) {
-  return String(str).replace(/[&<>"']/g, (c) => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  return String(str).replace(/[&<>"'—]/g, (c) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;", "—": "&mdash;"
   }[c]));
 }
 

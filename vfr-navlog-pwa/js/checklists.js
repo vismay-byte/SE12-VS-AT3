@@ -145,7 +145,7 @@ export function runSelfTests(aircraftList) {
           .join("");
 
         return (
-          "<details class=\"checklist-phase\"" + (phaseIdx === 0 ? " open" : "") + ">" +
+          "<details class=\"checklist-phase\" data-phase-id=\"" + phase.id + "\"" + (phaseIdx === 0 ? " open" : "") + ">" +
           "<summary>" +
           '<span class="checklist-phase__label">' + escapeHtml(phase.label) + "</span>" +
           '<span class="chip ' + (complete ? "chip--go" : "chip--caution") + '">' + checkedCount + " / " + phase.items.length + "</span>" +
@@ -165,9 +165,50 @@ export function runSelfTests(aircraftList) {
         const itemIndex = parseInt(box.dataset.index, 10);
         const phase = aircraft.checklists.find((p) => p.id === phaseId);
         setTick(aircraft.id, phaseId, itemIndex, box.checked, phase.items.length);
-        renderChecklist(); // full re-render keeps the phase's "N / M" chip and text strike-through in sync
+        updateChecklistProgress(aircraft); // patches chips/strike-through in place so open <details> stay open
       });
     });
+  }
+
+  // Updates the "N / M" chips and strike-through text in place, without touching
+  // the <details> elements, so a ticked item doesn't collapse an open phase.
+  function updateChecklistProgress(aircraft) {
+    let totalItems = 0;
+    let totalChecked = 0;
+
+    aircraft.checklists.forEach((phase) => {
+      const ticks = ticksFor(aircraft.id, phase.id, phase.items.length);
+      const checkedCount = ticks.filter(Boolean).length;
+      totalItems += phase.items.length;
+      totalChecked += checkedCount;
+      const complete = checkedCount === phase.items.length;
+
+      const detailsEl = listEl.querySelector('details[data-phase-id="' + phase.id + '"]');
+      if (!detailsEl) {
+        return;
+      }
+      const chip = detailsEl.querySelector(".chip");
+      if (chip) {
+        chip.textContent = checkedCount + " / " + phase.items.length;
+        chip.classList.toggle("chip--go", complete);
+        chip.classList.toggle("chip--caution", !complete);
+      }
+
+      phase.items.forEach((item, itemIdx) => {
+        const checkboxId = "checklist-item-" + aircraft.id + "-" + phase.id + "-" + itemIdx;
+        const input = document.getElementById(checkboxId);
+        if (!input) {
+          return;
+        }
+        input.checked = !!ticks[itemIdx];
+        const span = input.parentElement.querySelector(".checklist-item__text");
+        if (span) {
+          span.classList.toggle("checklist-item__text--done", !!ticks[itemIdx]);
+        }
+      });
+    });
+
+    overallProgressEl.textContent = aircraft.name + ": " + totalChecked + " / " + totalItems + " items complete.";
   }
 
   aircraftSelect.addEventListener("change", renderChecklist);
